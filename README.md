@@ -64,3 +64,38 @@ https://cs50.harvard.edu/web/2020/
 4) использовали snake_case
 5) копипаста обработчиков событий
 
+## лекция 02-10
+
+Логинов Иван читал лекцию про сети
+Рекомендуется так же https://www.youtube.com/watch?v=rLUzYeLdM0k как овервью технологий о которых говорилось на лекции
+На практической части мы успели поговорить подробнее об http на примере сервиса https://jsonplaceholder.typicode.com/
+Мы использовали https://www.postman.com/ для совершения запросов
+Смотрели на https://ru.wikipedia.org/wiki/WebSocket на примере telegram
+
+## лекция 09-10
+
+Денис Липин рассказывал про дизайн
+
+
+## лекция 11-10 взамен лекции 25-09
+
+package.json:
+   dependencies/ devDependencies
+   scripts
+Подробнее тут
+https://docs.npmjs.com/cli/v7/configuring-npm/package-json
+Секцию про зависимости нужно подробно изучить
+
+Говорили про пакетные менеджеры
+https://www.npmjs.com/package/npm
+https://www.npmjs.com/package/yarn
+(забавно что пакетные менеджеры тоже являются пакетами)
+Однажды я искал архиватор чтобы разархивировать файл и скачал архиватор который был внутри архива.
+
+Запускали проекты ребят.
+Поработали с nodejs на примере реализации автоматического апдейта странички при изменении исходников.
+Использовали на клиенте fetch чтобы отправить http запрос
+Тут упомянули что есть такая штука как https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise
+Использовали подход https://learn.javascript.ru/long-polling
+на nodejs использовали fs для чтения файлов и слежения за изменениями
+модуль http использовали чтобы зарегистрировать сервер
