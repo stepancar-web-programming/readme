@@ -94,9 +94,11 @@ https://www.npmjs.com/package/yarn
 
 Запускали проекты ребят.
 Поработали с nodejs на примере реализации автоматического апдейта странички при изменении исходников.
+[Про nodejs слушать тут](https://www.youtube.com/watch?v=ztspvPYybIY)
 Использовали на клиенте fetch чтобы отправить http запрос
 Тут упомянули что есть такая штука как https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise
 Использовали подход https://learn.javascript.ru/long-polling
 на nodejs использовали fs для чтения файлов и слежения за изменениями
 модуль http использовали чтобы зарегистрировать сервер
 [Код лежит тут](https://github.com/stepancar-web-programming/auto-page-reload)
+
