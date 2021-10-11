@@ -99,3 +99,4 @@ https://www.npmjs.com/package/yarn
 Использовали подход https://learn.javascript.ru/long-polling
 на nodejs использовали fs для чтения файлов и слежения за изменениями
 модуль http использовали чтобы зарегистрировать сервер
+[Код лежит тут](https://github.com/stepancar-web-programming/auto-page-reload)
