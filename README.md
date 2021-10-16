@@ -149,3 +149,10 @@ https://www.npmjs.com/package/yarn
 модуль http использовали чтобы зарегистрировать сервер
 [Код лежит тут](https://github.com/stepancar-web-programming/auto-page-reload)
 
+
+## практика 16.10
+
+Проводили ретро
+создали приложение с помощью https://ru.reactjs.org/docs/create-a-new-react-app.html
+Отобразили список тортиков
+
