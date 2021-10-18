@@ -152,7 +152,8 @@ https://www.npmjs.com/package/yarn
 
 ## практика 16.10
 
-Проводили ретро
+Проводили ретро.
 создали приложение с помощью https://ru.reactjs.org/docs/create-a-new-react-app.html
 Отобразили список тортиков
+[Пример разворачивания проекта](https://www.youtube.com/watch?v=Dsgegf15ccA)
 
