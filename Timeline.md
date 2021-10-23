@@ -12,7 +12,7 @@
 
 30.10 (жесткий дэдлайн)
 
-10 Баллов.
+10 Баллов. Каждую неделю максимальный балл уменьшается на 2
 
 Создать репозиторий в проекте https://github.com/stepancar-web-programming с именем
 calculator-{firstName}-{secondName}  пример: calculator-stepan-mikhailiuk
