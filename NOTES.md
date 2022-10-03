@@ -79,7 +79,7 @@
 ## 24.09.2022 33201, 01.10.2022 33211
 
 Поговорили про асинхронные запросы, поразбирались с 
-fetch api, использовали конструкции async, await.
+[fetch api](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), использовали конструкции [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function), [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await).
 Разбирались с тем, как отправить несколько запросов параллельно. Как отправлять их последовательно. 
 
 Смотрели на таймлайн запросов в devtools. Разбирались как найти код инициировавший запрос, кратко поразбирались на что тратится время при отправке запросов.
@@ -88,20 +88,21 @@ fetch api, использовали конструкции async, await.
 
 В качестве тестового API использовали
 
-Поговорили про websocket, его применение, посмотрели в devtools пакеты у telegram, как более удачный пример посмотрели на то, что отправляет по web сокету [сервис доставки цветов](https://spb.flowers-sib.ru), при попытке написать в чат.
+Поговорили про [websocket](https://javascript.info/websocket), его применение, [посмотрели в devtools пакеты](https://developer.chrome.com/docs/devtools/network/) у telegram, как более удачный пример посмотрели на то, что отправляет по web сокету [сервис доставки цветов](https://spb.flowers-sib.ru), при попытке написать в чат.
 
 Поговорили про [longpolling](https://javascript.info/long-polling)
 
-Упомянули про postman, который часто используется для проверки работы API.
+Упомянули про [postman](https://www.postman.com/), который часто используется для проверки работы API.
 
-Установили nodejs, поговорили про его назначение, вскользь затронули вопросы производительности nodejs.
-Поиграли с nodejs терминалом, создали первый httpServer на nodejs.
+Установили [nodejs](https://nodejs.org/), поговорили про его назначение, вскользь затронули вопросы производительности nodejs.
+Поиграли с nodejs терминалом, создали [первый httpServer на nodejs](https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTP-server/).
 
-Поговорили про встроенные пакеты nodejs, о том как их импортировать и использовать.
+Простейший пример long polling на безе nodejs сервера можно посмотреть [тут](https://github.com/stepancar-web-programming/auto-page-reload)
 
-Создали свой модуль, с парой функций `sum, sub`, имортировали его внутри indexjs c помощью require и конструкции import.
+Поговорили про [встроенные пакеты nodejs](https://www.w3schools.com/nodejs/ref_modules.asp), о том как их импортировать и использовать.
 
-Поговорили про пакеты, менеджер пакетов npm, registry npmjs.com, 
-Поговорили про package.json и его структуру, обсудили некоторые проблемы зависимостей в мире front-end
-Обсудили назначение файла package-lock.json
+Создали свой модуль, с парой функций `sum, sub`, имортировали его внутри indexjs c помощью [require](https://nodejs.org/en/knowledge/getting-started/what-is-require/) и конструкции [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
+Поговорили про пакеты, менеджер пакетов [npm](https://en.wikipedia.org/wiki/Npm_(software)), registry [npmjs.com](https://www.npmjs.com/), 
+Поговорили про [package.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-json) и его структуру, обсудили некоторые проблемы зависимостей в мире front-end
+Обсудили назначение файла [package-lock.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-lock-json)
