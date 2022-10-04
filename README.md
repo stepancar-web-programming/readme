@@ -2,7 +2,7 @@
 
 **Please manually modify the value of organization and token before running**
 
-## Download and Usage   
+## Download and Usage
 
 First copy the github repository link, download the github repository to the local
 
@@ -22,6 +22,10 @@ You just need to upload the xlsx file to the web page and the program will run a
 
 ## In Addition  
 
-*git.js* is a js script that can automatically create repositories by controlling elements on web pages.   
+*git.js* is a js script that can automatically create repositories by controlling elements on web pages.
 But I can't solve the problem that the script keeps running after the webpage refreshes.
-Tried using iframe, localstorage, sessionstorage all without success, If anyone has any ideas please let me know.
+Tried using iframe, localstorage, sessionstorage all without success, If anyone has any ideas please let me know.  
+
+### How to use git.js
+
+First open *Chrome DevTool*, click on the source code tab, click the code segment on the left, create a new code segment, copy the code in git.js, then right-click the newly created code segment, and click Run.

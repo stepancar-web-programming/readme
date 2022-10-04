@@ -56,5 +56,4 @@ const str = '2022-fall-lab-portfolio-' + sessionStorage.getItem(String(i))
 repositoryName[0].value = str
 repositoryVisibility[0].checked = true
 button[0].disabled = false
-button[0].submit
-window.history.go(-1)
+button[0].click()
