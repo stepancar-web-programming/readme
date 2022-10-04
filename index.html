@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="text-center">
+    <main class="form-signin w-100 m-auto">
+        <form><svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor"
+                class="bi bi-emoji-sunglasses" viewBox="0 0 16 16">
+                <path
+                    d="M4.968 9.75a.5.5 0 1 0-.866.5A4.498 4.498 0 0 0 8 12.5a4.5 4.5 0 0 0 3.898-2.25.5.5 0 1 0-.866-.5A3.498 3.498 0 0 1 8 11.5a3.498 3.498 0 0 1-3.032-1.75zM7 5.116V5a1 1 0 0 0-1-1H3.28a1 1 0 0 0-.97 1.243l.311 1.242A2 2 0 0 0 4.561 8H5a2 2 0 0 0 1.994-1.839A2.99 2.99 0 0 1 8 6c.393 0 .74.064 1.006.161A2 2 0 0 0 11 8h.438a2 2 0 0 0 1.94-1.515l.311-1.242A1 1 0 0 0 12.72 4H10a1 1 0 0 0-1 1v.116A4.22 4.22 0 0 0 8 5c-.35 0-.69.04-1 .116z" />
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0z" />
+            </svg>
+            <h1 class="h3 mb-3 fw-normal">
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">Please upload file</font>
+                </font>
+            </h1>
+
+            <div class="input-group ">
+                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload" onchange="importf(this)">
+            </div>
+
+        </form>
+    </main>
+    <script type="module">
+        import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
+
+
+
+        /* -------------------please modify here--------------------- */
+
+        const TOKEN = "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"
+        const ORG = "DenisAndGzh"
+
+        /* ---------------------------------------------------------- */
+
+
+
+        export const clientWithAuth = new Octokit({
+            auth: TOKEN //TOKEN
+        });
+
+        function importf(obj) {//导入
+            var wb;//读取完成的数据
+            var rABS = false; //是否将文件读取为二进制字符串
+            if (!obj.files) {
+                return;
+            }
+            var f = obj.files[0];
+            var reader = new FileReader();
+            if (rABS) {
+                reader.readAsArrayBuffer(f);
+            } else {
+                reader.readAsBinaryString(f);
+            }
+            reader.onload = function (e) {
+                var data = e.target.result;
+                if (rABS) {
+                    wb = XLSX.read(btoa(fixdata(data)), {//手动转化
+                        type: 'base64'
+                    });
+                } else {
+                    wb = XLSX.read(data, {
+                        type: 'binary'
+                    });
+                }
+                //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+                //wb.Sheets[Sheet名]获取第一个Sheet的数据
+                var result = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+                console.log(result);
+                result = filterObj(result)
+                console.log(result);
+                //createRepositories(result);
+                deleteRepositories(result);
+            };
+        }
+        window.importf = importf;
+        function fixdata(data) { //文件流转BinaryString
+            var o = "",
+                l = 0,
+                w = 10240;
+            for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+            o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+            return o;
+        }
+
+        function filterObj(obj) {
+            const result = {}
+            var length = 0
+            Object.keys(obj).filter((key) => {
+                if (/P332*/.test(obj[key].__EMPTY)) {
+                    result[key] = transliterate(obj[key].__EMPTY_1);
+                    length = length + 1
+                }
+            })
+            result.length = length
+            return result
+        }
+
+        function transliterate(str) {
+            var ru = {
+                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+                'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i',
+                'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+                'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+                'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+                'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya'
+            }, n_str = [];
+            str = str.replace(/[ъь]+/g, '').replace(/й/g, 'i');
+            for (var i = 0; i < str.length; ++i) {
+                n_str.push(
+                    ru[str[i]]
+                    || ru[str[i].toLowerCase()] == undefined && str[i]
+                    || ru[str[i].toLowerCase()].toUpperCase()
+                );
+            }
+            return n_str.join('').replace(/(^\s*)|(\s*$)/g, "").replaceAll(' ', '-');
+        }
+
+        function createRepositories(nameList) {
+            for (var i = 0; i < nameList.length; ++i) {
+                //clientWithAuth.repos.delete({  //删除储存库
+                clientWithAuth.repos.createInOrg({
+                    org: ORG,
+                    name: "2022-fall-lab-portfolio-" + nameList[i]
+                });
+                console.log("Created Repositories:" + "2022-fall-lab-portfolio-" + nameList[i])
+            }
+        }
+
+        function deleteRepositories(nameList) {
+            for (var i = 0; i < 4; ++i) {
+                clientWithAuth.repos.delete({
+                    owner: ORG,
+                    repo: "2022-fall-lab-portfolio-" + nameList[i]
+                });
+                console.log("Delete Repositories:" + "2022-fall-lab-portfolio-" + nameList[i])
+            }
+        }
+    </script>
+</body>
+
+</html>
