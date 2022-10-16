@@ -106,3 +106,76 @@
 Поговорили про пакеты, менеджер пакетов [npm](https://en.wikipedia.org/wiki/Npm_(software)), registry [npmjs.com](https://www.npmjs.com/), 
 Поговорили про [package.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-json) и его структуру, обсудили некоторые проблемы зависимостей в мире front-end
 Обсудили назначение файла [package-lock.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-lock-json)
+
+## 08.10.2022 33201, 15.10.2022 33211
+
+Обсудили понятие [Boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code)
+
+Для изучения того, что делают сборщики ресурсов скачали проект https://github.com/taniarascia/webpack-boilerplate
+
+Этот проект нельзя назвать идеальным, но для демонстрации он хорошо подходит.
+
+Мы изучили команды которые есть в этом проекте.
+Разобрались с понятием [code linting](https://en.wikipedia.org/wiki/Lint_(software)), посмотрели как это работает на примере [eslint](https://eslint.org/), расмотрели примеры конфигов. Обсудили популярные пресеты [1](https://github.com/eslint/eslint/blob/main/conf/eslint-recommended.js) [2](https://www.npmjs.com/package/eslint-config-airbnb)
+
+Обсудили понятие форматирования кода на примере [prettier](https://prettier.io/)
+Изучили его конфиг.
+
+Поговорили про вызовы, с которыми сталкиваются фронт энд разработчики при желании использовать новые фичи браузеров.
+
+Рассмотрели примеры преобразования javascript c помощью [babel](https://babeljs.io/), изучили его конфиг в проекте.
+
+Обсудили проблемы создания такого конфига, рассмотрели идею [browserlist](https://github.com/browserslist/browserslist)
+
+Запустили проект, посмотрели на то, какие запросы отправлялись браузером, что находилось внутри DOM в результате рендеринга страницы. 
+
+Заметили несостыковки между исходным кодом и результатом.
+Странные импорты картинок в коде на `javascript`, разницу в путях к ресурсам в коде и на отрендеренной странице
+Заметили запрос на websocket, код которого мы в приложении не нашли.
+
+Начали говорить о [webpack](https://webpack.js.org/) и его предназначении.
+Разобрались с понятием [entrypoint](https://webpack.js.org/concepts/entry-points/)
+
+Обсудили понятие [bundling](https://matcha.fyi/bundling-javascript/). Для тех студентов, кто хочет разобраться как это работает можно читать официальную документацию `webpack`, там много кросс сылок, [одна из них рекомендована к просмотру](https://www.youtube.com/watch?v=Gc9-7PBqOC8)
+
+Посмотрели на то, как выглядит конечный bundle.
+
+Разобрали понятие [webpack-loaders](https://webpack.js.org/concepts/loaders/) на примере конфига.
+
+Обсудили необходимость разных конфигов для `production` и `development`
+
+По каждому отдельному типу ресурса проговорили как именно он попадает в бандл.
+Обсудили назначение [base64](https://en.wikipedia.org/wiki/Base64) на примере загрузки [svg](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
+
+Обсудили что такое [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) и какие задачи он решает и поняли откуда взялся тот самый `websocket` connection, код для которого мы не смогли найти.
+
+Таким образом, мы изучили вопрос сборки проекта.
+
+Обсудили так же что есть другие инструменты сборки, такие как [gulp](https://gulpjs.com/), [grunt](https://gruntjs.com/), [vitejs](https://vitejs.dev/guide/why.html) и тд.
+
+Создали проект с помощью [react-create-app](https://reactjs.org/docs/create-a-new-react-app.html)
+
+Заметили что созданный `boilerplate` на содержит явных конфигов, которые мы видели в предыдущем проекте.
+Обсудили конфигурацию `eslint`, `browserlist` внутри `package.json`, изучили [команды](https://create-react-app.dev/docs/available-scripts)
+Проговорили назначение команды [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject)
+
+Изучили код проекта, снова обсудили каким образом загружены разные типы ресурсов.
+
+Начали изучать код компонентов на react.
+Мы не стали разбирать что такое реакт, как он работает, начали с того что мы примерно понимаем как им пользоваться.
+
+Обсудили что такое [jsx](https://reactjs.org/docs/introducing-jsx.html)
+
+Посмотрели на то, как написать код [без jsx](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
+Можно так же посмотреть во что превращается ваш `jsx` код [тут](https://infoheap.com/online-react-jsx-to-javascript/)
+
+Очень кратко обсудили понятие `компонент` ,
+Разобрали на примерах как сгенерить представление списка, как в `jsx` сделать условный рендеринг
+
+Поговорили о том, как [пробрасывать параметры в компонент](https://reactjs.org/docs/components-and-props.html).
+
+[Как обрабатывать события](https://reactjs.org/docs/handling-events.html)
+
+Не разбирались с тем как он работает.
+
+Вспомнили еще раз про [Destructuring_assignment в js](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
