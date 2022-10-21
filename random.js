@@ -1,3 +1,12 @@
+/*
+
+Usage: 
+    npm install jspdf
+    node random.js
+
+*/
+
+
 const jsPDF = require("jspdf").jsPDF
 
 // Cyrillic font as binary string
@@ -92,16 +101,19 @@ for (const studentName of students) {
     })
 }
 
-res.forEach(item => {
+const doc = new jsPDF()
+doc.addFileToVFS('CyrillicFont.ttf', font)
+doc.addFont('CyrillicFont.ttf', 'Cyrillic', 'normal');
+doc.setFont('Cyrillic')
+doc.setFontSize(12)
+
+res.forEach((item, pos) => {
     const text = `Рубежная работа №1 20.10.2022 \n
     ${item.studentName} \n
     Вопросы: \n${item.questions.map((q, i) => `${i + 1}) ${q}`).join('\n')}`
 
-    const doc = new jsPDF()
-    doc.addFileToVFS('CyrillicFont.ttf', font)
-    doc.addFont('CyrillicFont.ttf', 'Cyrillic', 'normal');
-    doc.setFont('Cyrillic')
-    doc.setFontSize(12)
-    doc.text(text, 10, 10);
-    doc.save(`${item.studentName}.pdf`)
+    if (pos != 0) doc.addPage()
+    doc.text(text, 10, 10)
 })
+
+doc.save('rubesh.pdf')
