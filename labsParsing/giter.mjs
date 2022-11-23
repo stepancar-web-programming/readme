@@ -1,11 +1,12 @@
 import tr from 'transliteration';
 import fs from 'node:fs';
 import path from 'node:path';
+import fetch from 'node-fetch';
 import {Builder, By} from 'selenium-webdriver';
 
 const REPONAMEPREFIX = "https://github.com/stepancar-web-programming/2022-fall-lab-portfolio-";
 const FOLDERNAMEPREFIX = "2022-fall-lab-portfolio-";
-const BRANCHES = ["main", "dev", "master"];
+const BRANCH = "dev";
 
 const STUDENTS_LIST_FILE_NAME = "studs.txt"
 var HEIGHT = 1080;
@@ -25,13 +26,28 @@ const studsPath = path.join(__dirname, STUDENTS_LIST_FILE_NAME);  // собир�
 var links = [];
 const RESULTSROOT = path.join(__dirname, "results");
 
-const GITHUB_TIMEOUT = 500;
 const STUDENT_DEMO_TIMEOUT = 2000;
+const GITHUB_API_ERROR_MSG = "404: Not Found";
 
 const STUDENT_README_FILENAME = "README.md"
 
 function getRepoLink(repositoryName) {
   return REPONAMEPREFIX + repositoryName;
+}
+
+async function getReadmeContent(name) {
+  const url = `https://raw.githubusercontent.com/stepancar-web-programming/2022-fall-lab-portfolio-${name}/dev/README.md`;
+  return fetch(url).then(function(response) {
+    return response.text();
+  }).catch(function(e) {
+    console.log(`Branch ${BRANCH} does not contain README for student ${name}`);
+  });
+}
+
+function extractLink(text) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  text.replace(/(\r\n|\n|\r)/gm, "");
+  return text.match(urlRegex)[0];
 }
 
 fsp.readFile(studsPath, { encoding: 'utf-8' })
@@ -55,33 +71,15 @@ fsp.readFile(studsPath, { encoding: 'utf-8' })
       const name = link_and_name[1];
       const dirpath = path.join(RESULTSROOT, FOLDERNAMEPREFIX + name);  // папка для каждого студента
       fs.mkdirSync(dirpath, { recursive: true });
-      
-      var readmeContainer = null;
-      var demoLink = null;
 
-      for(const branch of BRANCHES) {
-        try {
-          await driver.get(link + "/tree/" + branch);
-          await new Promise (r => setTimeout(r, GITHUB_TIMEOUT));
-          readmeContainer = await driver.findElement(By.id('readme'));
+      const readmeText = await getReadmeContent(name);
+      if(readmeText === GITHUB_API_ERROR_MSG) continue;
 
-          const possibleLinks = await readmeContainer.findElement(By.css('article')).findElements(By.css('a'));
-          for(const pl of possibleLinks) {
-            if(!(await pl.getAttribute("href")).includes("stepancar")) {
-              demoLink = pl;
-              break;
-            }
-          }
-          demoLink = await demoLink.getAttribute("href");
-          break;
-        }
-        catch {
-          readmeContainer = null;
-        }
+      let demoLink;
+      try {
+        demoLink = extractLink(readmeText);
       }
-
-      if(!readmeContainer) {
-        console.log("No README found for " + name);
+      catch {
         continue;
       }
 
@@ -94,7 +92,7 @@ fsp.readFile(studsPath, { encoding: 'utf-8' })
         fs.mkdirSync(path.join(dirpath, ...fileParentDirs), { recursive: true });  // переношу пути из pathname в файловую систему
       }
 
-      const readmeText = await readmeContainer.findElement(By.css('article')).getText();
+      console.log(extractLink(readmeText));
       fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readmeText);
 
       await driver.get(demoLink);
