@@ -12,11 +12,11 @@ const STUDENTS_LIST_FILE_NAME = "studs.txt"
 var HEIGHT = 1080;
 var WIDTH = 1920;
 
-process.argv.forEach(function (val, index, array) {
+process.argv.forEach(function (val) {
   const argParts = val.split("=");
   if(argParts.length == 2) {
     if(argParts[0] == "width") WIDTH = parseInt(argParts[1], 10);
-    if(argParts[0] == "height") WIDTH = parseInt(argParts[1], 10);
+    if(argParts[0] == "height") HEIGHT = parseInt(argParts[1], 10);
   }
 });
 
@@ -86,13 +86,13 @@ fsp.readFile(studsPath, { encoding: 'utf-8' })
       const dlUrl = new URL(demoLink);
       var dlPath = dlUrl.pathname == "/" ? "index" : dlUrl.pathname;
       if(dlPath[dlPath.length - 1] == "/") dlPath = dlPath.slice(0, -1);
+      dlPath = dlPath.split("/").map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join("/");
       const fileParentDirs = dlPath.split("/");
       fileParentDirs.pop();
       if(fileParentDirs.length > 0) {
-        fs.mkdirSync(path.join(dirpath, ...fileParentDirs), { recursive: true });  // переношу пути из pathname в файловую систему
+        fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
       }
-
-      console.log(extractLink(readmeText));
+      
       fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readmeText);
 
       await driver.get(demoLink);
