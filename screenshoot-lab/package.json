@@ -1,0 +1,27 @@
+{
+  "name": "script_screen_demo",
+  "version": "1.0.0",
+  "description": "app for screen shoot portfolio website",
+  "main": "screen-shoot.js",
+  "dependencies": {
+    "ai-switcher-translit": "^1.0.2",
+    "cyrillic-to-translit-js": "^3.2.1",
+    "dom-parser": "^0.1.6",
+    "get-file": "^2.0.0",
+    "jsdom": "^20.0.3",
+    "node-fetch": "^2.6.7",
+    "puppeteer": "^19.2.2",
+    "url-to-screenshot": "^3.0.0",
+    "xhr2": "^0.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jeremie2k1",
+  "license": "ISC"
+}
