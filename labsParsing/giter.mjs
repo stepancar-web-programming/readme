@@ -5,6 +5,7 @@ import fetch from 'node-fetch';
 import { Builder } from 'selenium-webdriver';
 
 const FOLDERNAMEPREFIX = '2022-fall-lab-portfolio-';
+const ORG_NAME = 'stepancar-web-programming';
 const BRANCH = 'dev';
 
 const STUDENTS_LIST_FILE_NAME = 'studs.txt';
@@ -28,23 +29,47 @@ const PROJECT_DIR_NAME = path.resolve();
 const studsPath = path.join(PROJECT_DIR_NAME, STUDENTS_LIST_FILE_NAME); // путь до списка студентов
 const projectsNames = [];
 const RESULTSROOT = path.join(PROJECT_DIR_NAME, 'results');
-
-const STUDENT_DEMO_TIMEOUT = 2000;
-const GITHUB_API_ERROR_MSG = '404: Not Found';
+const STUDENT_DEMO_TIMEOUT = 1000;
+const DEPLOY_APPS_SIGNS = ['netlify'];
 
 const STUDENT_README_FILENAME = 'README.md';
 
+function isLikeReadme(gitFileName) {
+  return gitFileName.toLowerCase() === 'readme.md';
+}
+
+async function getReadmeName(name) {
+  // эта штука отрубается, если запускать много раз (лимит запросов на IP)
+  const treeTemplateUrl = `https://api.github.com/repos/${ORG_NAME}/2022-fall-lab-portfolio-${name}/git/trees/${BRANCH}`;
+  const repoTree = await fetch(treeTemplateUrl).then((response) => response.json()).catch((e) => {
+    console.log(`Branch ${BRANCH} for student ${name} is not present. Error: ${e}`);
+  });
+  const readMes = repoTree.tree.filter((treeElement) => isLikeReadme(treeElement.path));
+  return readMes[0].path;
+}
+
 async function getReadmeContent(name) {
-  const url = `https://raw.githubusercontent.com/stepancar-web-programming/2022-fall-lab-portfolio-${name}/dev/README.md`;
+  const readMeName = await getReadmeName(name);
+  const url = `https://raw.githubusercontent.com/${ORG_NAME}/2022-fall-lab-portfolio-${name}/dev/${readMeName}`;
+  console.log(url);
   return fetch(url).then((response) => response.text()).catch((e) => {
     console.log(`Branch ${BRANCH} does not contain README for student ${name}. Error: ${e}`);
   });
 }
 
-function extractLink(text) {
-  const urlRegex = /(https?:\/\/[^)">\s]+)/g;
+function mostAppropriateLink(matched, repoName) {
+  const okLinkSigns = repoName.split('-').concat(DEPLOY_APPS_SIGNS);
+  return matched.filter((processedUrl) => okLinkSigns.some((aLS) => processedUrl.includes(aLS)))[0];
+}
+
+function extractLink(text, repoName) {
+  const urlRegex = /(https?:\/\/[^)(">\s]+)/g;
   text.replace(/(\r\n|\n|\r)/gm, '');
-  return text.match(urlRegex)[0];
+  const matched = text.match(urlRegex);
+  if (matched.length === 1) {
+    return matched[0];
+  }
+  return mostAppropriateLink(matched, repoName);
 }
 
 fsp.readFile(studsPath, { encoding: 'utf-8' })
@@ -57,18 +82,23 @@ fsp.readFile(studsPath, { encoding: 'utf-8' })
       projectsNames.push(finalname); // имя владельца
     });
   })
-  .catch((err) => { console.log(err); });
+  .catch((err) => {
+    console.log(err);
+  });
 
 const driver = await new Builder().forBrowser('chrome').build();
 try {
   // eslint-disable-next-line no-restricted-syntax
   for (const name of projectsNames) {
     /* eslint-disable no-await-in-loop */
+    console.log();
     const dirpath = path.join(RESULTSROOT, FOLDERNAMEPREFIX + name); // папка для каждого студента
     fs.mkdirSync(dirpath, { recursive: true });
 
-    const readmeText = await getReadmeContent(name);
-    if (readmeText === GITHUB_API_ERROR_MSG) {
+    let readmeText;
+    try {
+      readmeText = await getReadmeContent(name);
+    } catch {
       console.log(`Branch ${BRANCH} does not contain README for student ${name}.`);
       // eslint-disable-next-line no-continue
       continue;
@@ -76,9 +106,10 @@ try {
 
     let demoLink;
     try {
-      demoLink = extractLink(readmeText);
+      demoLink = extractLink(readmeText, `2022-fall-lab-portfolio-${name}`);
       console.log(`Extracted ${demoLink} for ${name}`);
     } catch {
+      console.log(`Branch ${BRANCH} does not contain demo links for student ${name}.`);
       // eslint-disable-next-line no-continue
       continue;
     }
@@ -99,10 +130,8 @@ try {
 
     await driver.get(demoLink);
     await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
-    await new Promise((r) => {
-      setTimeout(r, STUDENT_DEMO_TIMEOUT);
-    });
     const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
+    await new Promise((r) => { setTimeout(r, STUDENT_DEMO_TIMEOUT); });
     await driver.takeScreenshot().then((pic) => {
       fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
         if (screenShotError) {
