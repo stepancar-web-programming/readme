@@ -38,32 +38,34 @@ function isLikeReadme(gitFileName) {
   return gitFileName.toLowerCase() === 'readme.md';
 }
 
-async function getReadmeName(name) {
+async function getReadmeName(name) { // хожу в апи за деревом репозитория. Ищу README
   // эта штука отрубается, если запускать много раз (лимит запросов на IP)
   const treeTemplateUrl = `https://api.github.com/repos/${ORG_NAME}/2022-fall-lab-portfolio-${name}/git/trees/${BRANCH}`;
   const repoTree = await fetch(treeTemplateUrl).then((response) => response.json()).catch((e) => {
     console.log(`Branch ${BRANCH} for student ${name} is not present. Error: ${e}`);
   });
   const readMes = repoTree.tree.filter((treeElement) => isLikeReadme(treeElement.path));
-  return readMes[0].path;
+  return readMes[0].path; // если README нет, вылетит исключение, которое зктем словится
 }
 
 async function getReadmeContent(name) {
   const readMeName = await getReadmeName(name);
   const url = `https://raw.githubusercontent.com/${ORG_NAME}/2022-fall-lab-portfolio-${name}/dev/${readMeName}`;
-  console.log(url);
+  console.log(`Processing ${name}'s README from ${url}`);
   return fetch(url).then((response) => response.text()).catch((e) => {
     console.log(`Branch ${BRANCH} does not contain README for student ${name}. Error: ${e}`);
   });
 }
 
 function mostAppropriateLink(matched, repoName) {
+  // проверяю строку-урл на наличие общих подстрок с именем репозитория
+  // чаще всего совпадает имя студента, 2022, слово "лаба"
   const okLinkSigns = repoName.split('-').concat(DEPLOY_APPS_SIGNS);
   return matched.filter((processedUrl) => okLinkSigns.some((aLS) => processedUrl.includes(aLS)))[0];
 }
 
 function extractLink(text, repoName) {
-  const urlRegex = /(https?:\/\/[^)(">\s]+)/g;
+  const urlRegex = /(https?:\/\/[^)(">\s]+)/g; // https:// и любое ненулевое кол-во символов, кроме )(">\s
   text.replace(/(\r\n|\n|\r)/gm, '');
   const matched = text.match(urlRegex);
   if (matched.length === 1) {
@@ -120,6 +122,7 @@ try {
       dlPath = dlPath.slice(0, -1);
     }
     dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
+    // https://site.com/a/b/c.html сохранится, как /a/b/c.html
     const fileParentDirs = dlPath.split('/');
     fileParentDirs.pop();
     if (fileParentDirs.length > 0) {
