@@ -59,61 +59,59 @@ fsp.readFile(studsPath, { encoding: 'utf-8' })
   })
   .catch((err) => { console.log(err); });
 
-(async function walkRepos() {
-  const driver = await new Builder().forBrowser('chrome').build();
-  try {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const name of projectsNames) {
-      /* eslint-disable no-await-in-loop */
-      const dirpath = path.join(RESULTSROOT, FOLDERNAMEPREFIX + name); // папка для каждого студента
-      fs.mkdirSync(dirpath, { recursive: true });
+const driver = await new Builder().forBrowser('chrome').build();
+try {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const name of projectsNames) {
+    /* eslint-disable no-await-in-loop */
+    const dirpath = path.join(RESULTSROOT, FOLDERNAMEPREFIX + name); // папка для каждого студента
+    fs.mkdirSync(dirpath, { recursive: true });
 
-      const readmeText = await getReadmeContent(name);
-      if (readmeText === GITHUB_API_ERROR_MSG) {
-        console.log(`Branch ${BRANCH} does not contain README for student ${name}.`);
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      let demoLink;
-      try {
-        demoLink = extractLink(readmeText);
-        console.log(`Extracted ${demoLink} for ${name}`);
-      } catch {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      const dlUrl = new URL(demoLink);
-      let dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname;
-      if (dlPath[dlPath.length - 1] === '/') {
-        dlPath = dlPath.slice(0, -1);
-      }
-      dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
-      const fileParentDirs = dlPath.split('/');
-      fileParentDirs.pop();
-      if (fileParentDirs.length > 0) {
-        fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
-      }
-
-      fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readmeText);
-
-      await driver.get(demoLink);
-      await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
-      await new Promise((r) => {
-        setTimeout(r, STUDENT_DEMO_TIMEOUT);
-      });
-      const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
-      await driver.takeScreenshot().then((pic) => {
-        fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
-          if (screenShotError) {
-            console.log(screenShotError);
-          }
-        });
-      });
-      /* eslint-enable no-await-in-loop */
+    const readmeText = await getReadmeContent(name);
+    if (readmeText === GITHUB_API_ERROR_MSG) {
+      console.log(`Branch ${BRANCH} does not contain README for student ${name}.`);
+      // eslint-disable-next-line no-continue
+      continue;
     }
-  } finally {
-    await driver.quit();
+
+    let demoLink;
+    try {
+      demoLink = extractLink(readmeText);
+      console.log(`Extracted ${demoLink} for ${name}`);
+    } catch {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    const dlUrl = new URL(demoLink);
+    let dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname;
+    if (dlPath[dlPath.length - 1] === '/') {
+      dlPath = dlPath.slice(0, -1);
+    }
+    dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
+    const fileParentDirs = dlPath.split('/');
+    fileParentDirs.pop();
+    if (fileParentDirs.length > 0) {
+      fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
+    }
+
+    fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readmeText);
+
+    await driver.get(demoLink);
+    await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
+    await new Promise((r) => {
+      setTimeout(r, STUDENT_DEMO_TIMEOUT);
+    });
+    const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
+    await driver.takeScreenshot().then((pic) => {
+      fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
+        if (screenShotError) {
+          console.log(screenShotError);
+        }
+      });
+    });
+    /* eslint-enable no-await-in-loop */
   }
-}());
+} finally {
+  await driver.quit();
+}
