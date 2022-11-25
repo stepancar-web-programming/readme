@@ -29,7 +29,7 @@ const PROJECT_DIR_NAME = path.resolve();
 const studsPath = path.join(PROJECT_DIR_NAME, STUDENTS_LIST_FILE_NAME); // путь до списка студентов
 const projectsNames = [];
 const RESULTSROOT = path.join(PROJECT_DIR_NAME, 'results');
-const STUDENT_DEMO_TIMEOUT = 1000;
+const PAGE_LOADED_SCRIPTS_EXECUTED_DELAY = 1000;
 const DEPLOY_APPS_SIGNS = ['netlify'];
 
 const STUDENT_README_FILENAME = 'README.md';
@@ -134,7 +134,7 @@ try {
     await driver.get(demoLink);
     await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
     const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
-    await new Promise((r) => { setTimeout(r, STUDENT_DEMO_TIMEOUT); });
+    await new Promise((r) => { setTimeout(r, PAGE_LOADED_SCRIPTS_EXECUTED_DELAY); });
     await driver.takeScreenshot().then((pic) => {
       fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
         if (screenShotError) {
