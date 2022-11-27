@@ -4,11 +4,17 @@ import path from 'node:path';
 import fetch from 'node-fetch';
 import { Builder } from 'selenium-webdriver';
 
-const FOLDERNAMEPREFIX = '2022-fall-lab-portfolio-';
 const ORG_NAME = 'stepancar-web-programming';
+const SEASON = '2022-fall';
+const PROJECT_TYPE = 'lab-portfolio';
 const BRANCH = 'dev';
+const GIT_API_HOSTNAME = 'https://raw.githubusercontent.com';
+const FILE_WITH_DEMO_LINK = 'package.json';
+const README_NAME = 'README.md';
+const API_NOT_FOUND_MESSAGE = '404: Not Found';
 
 const STUDENTS_LIST_FILE_NAME = 'studs.txt';
+
 let HEIGHT = 1080;
 let WIDTH = 1920;
 
@@ -27,61 +33,75 @@ process.argv.forEach((val) => {
 const fsp = fs.promises;
 const PROJECT_DIR_NAME = path.resolve();
 const studsPath = path.join(PROJECT_DIR_NAME, STUDENTS_LIST_FILE_NAME); // путь до списка студентов
-const projectsNames = [];
+const projectsInfo = [];
 const RESULTSROOT = path.join(PROJECT_DIR_NAME, 'results');
 const PAGE_LOADED_SCRIPTS_EXECUTED_DELAY = 1000;
-const DEPLOY_APPS_SIGNS = ['netlify'];
 
 const STUDENT_README_FILENAME = 'README.md';
 
-function isLikeReadme(gitFileName) {
-  return gitFileName.toLowerCase() === 'readme.md';
+function getRepoName(season, studentProjectType, studentName) {
+  const transliteratedStudentName = tr.transliterate(studentName).trim().toLowerCase();
+  const finalStudentName = transliteratedStudentName.split(' ').join('-');
+  return `${season}-${studentProjectType}-${finalStudentName}`;
 }
 
-async function getReadmeName(name) { // хожу в апи за деревом репозитория. Ищу README
-  // эта штука отрубается, если запускать много раз (лимит запросов на IP)
-  const treeTemplateUrl = `https://api.github.com/repos/${ORG_NAME}/2022-fall-lab-portfolio-${name}/git/trees/${BRANCH}`;
-  const repoTree = await fetch(treeTemplateUrl).then((response) => response.json()).catch((e) => {
-    console.log(`Branch ${BRANCH} for student ${name} is not present. Error: ${e}`);
+async function getGitFileContent(fileLocation, readFileName, branch) {
+  const url = `${fileLocation}/${branch}/${readFileName}`;
+  const apiAnswer = await fetch(url).then((response) => response.text()).catch((e) => {
+    console.log(`Reading ${readFileName} in ${fileLocation} on branch ${branch} caused an error: ${e}`);
+    return null;
   });
-  const readMes = repoTree.tree.filter((treeElement) => isLikeReadme(treeElement.path));
-  return readMes[0].path; // если README нет, вылетит исключение, которое зктем словится
-}
-
-async function getReadmeContent(name) {
-  const readMeName = await getReadmeName(name);
-  const url = `https://raw.githubusercontent.com/${ORG_NAME}/2022-fall-lab-portfolio-${name}/dev/${readMeName}`;
-  console.log(`Processing ${name}'s README from ${url}`);
-  return fetch(url).then((response) => response.text()).catch((e) => {
-    console.log(`Branch ${BRANCH} does not contain README for student ${name}. Error: ${e}`);
-  });
-}
-
-function mostAppropriateLink(matched, repoName) {
-  // проверяю строку-урл на наличие общих подстрок с именем репозитория
-  // чаще всего совпадает имя студента, 2022, слово "лаба"
-  const okLinkSigns = repoName.split('-').concat(DEPLOY_APPS_SIGNS);
-  return matched.filter((processedUrl) => okLinkSigns.some((aLS) => processedUrl.includes(aLS)))[0];
-}
-
-function extractLink(text, repoName) {
-  const urlRegex = /(https?:\/\/[^)(">\s]+)/g; // https:// и любое ненулевое кол-во символов, кроме )(">\s
-  text.replace(/(\r\n|\n|\r)/gm, '');
-  const matched = text.match(urlRegex);
-  if (matched.length === 1) {
-    return matched[0];
+  if ((apiAnswer === API_NOT_FOUND_MESSAGE) || (apiAnswer === null)) {
+    console.log(`No ${readFileName} found in ${fileLocation} on branch ${branch}`);
+    return null;
   }
-  return mostAppropriateLink(matched, repoName);
+  return apiAnswer;
+}
+
+function getRepositoryAPI(apiHost, organizationName, repositoryName) {
+  const linkToRepository = `${apiHost}/${organizationName}/${repositoryName}`;
+  return {
+    linkToRepository,
+    repositoryName,
+    readFileFromBranch: async (fileName, branch = 'master') => getGitFileContent(linkToRepository, fileName, branch),
+  };
+}
+
+async function getHomePageForRepository(repository) {
+  const packageJsonContent = await repository.readFileFromBranch(FILE_WITH_DEMO_LINK, BRANCH)
+    .then((an) => an)
+    .catch((er) => {
+      console.log(`Error ${er} occured getting ${FILE_WITH_DEMO_LINK} for repo ${repository.repositoryName} on branch ${BRANCH}`);
+      return null;
+    });
+  if (packageJsonContent === null) return null;
+  let packageAsJson;
+  try {
+    packageAsJson = JSON.parse(packageJsonContent);
+  } catch {
+    console.log(`Incorrect format for ${FILE_WITH_DEMO_LINK} for repo ${repository.repositoryName} on branch ${BRANCH}`);
+  }
+  return packageAsJson.homepage;
+}
+
+async function getReadMeForRepository(repository) {
+  const readMeContent = await repository.readFileFromBranch(README_NAME, BRANCH)
+    .then((an) => an)
+    .catch((er) => {
+      console.log(`Error ${er} occured getting ${README_NAME} for repo ${repository.repositoryName} on branch ${BRANCH}`);
+      return null;
+    });
+  return readMeContent;
 }
 
 fsp.readFile(studsPath, { encoding: 'utf-8' })
   .then((data) => {
     const studs = data.split('\n');
 
-    studs.forEach((rawStudentName) => {
-      const trname = tr.transliterate(rawStudentName).trim().toLowerCase();
-      const finalname = trname.split(' ').join('-');
-      projectsNames.push(finalname); // имя владельца
+    studs.forEach(async (rawStudentName) => {
+      const repoName = getRepoName(SEASON, PROJECT_TYPE, rawStudentName);
+      console.log(`Getting repo ${repoName} information...`);
+      projectsInfo.push(getRepositoryAPI(GIT_API_HOSTNAME, ORG_NAME, repoName));
     });
   })
   .catch((err) => {
@@ -91,30 +111,19 @@ fsp.readFile(studsPath, { encoding: 'utf-8' })
 const driver = await new Builder().forBrowser('chrome').build();
 try {
   // eslint-disable-next-line no-restricted-syntax
-  for (const name of projectsNames) {
+  for (const project of projectsInfo) {
     /* eslint-disable no-await-in-loop */
-    console.log();
-    const dirpath = path.join(RESULTSROOT, FOLDERNAMEPREFIX + name); // папка для каждого студента
+
+    const demoLink = await getHomePageForRepository(project);
+    const readMeContent = await getReadMeForRepository(project);
+    if ((demoLink === null) || (readMeContent === null)) {
+      console.log(`Finished processing ${project.repositoryName} as required files were not found`);
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    const dirpath = path.join(RESULTSROOT, project.repositoryName); // папка для каждого студента
     fs.mkdirSync(dirpath, { recursive: true });
-
-    let readmeText;
-    try {
-      readmeText = await getReadmeContent(name);
-    } catch {
-      console.log(`Branch ${BRANCH} does not contain README for student ${name}.`);
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-
-    let demoLink;
-    try {
-      demoLink = extractLink(readmeText, `2022-fall-lab-portfolio-${name}`);
-      console.log(`Extracted ${demoLink} for ${name}`);
-    } catch {
-      console.log(`Branch ${BRANCH} does not contain demo links for student ${name}.`);
-      // eslint-disable-next-line no-continue
-      continue;
-    }
 
     const dlUrl = new URL(demoLink);
     let dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname;
@@ -129,7 +138,7 @@ try {
       fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
     }
 
-    fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readmeText);
+    fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readMeContent);
 
     await driver.get(demoLink);
     await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
