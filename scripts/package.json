@@ -1,0 +1,14 @@
+{
+  "name": "scripts",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "generate-questions": "node ./src/generateQuestionsForStudents/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jspdf": "^2.5.1"
+  }
+}
