@@ -4,11 +4,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "generate-questions": "node ./src/generateQuestionsForStudents/index.js"
+    "generate-questions": "node ./src/generateQuestionsForStudents/index.js",
+    "generate-repositories": "node ./src/gerateRepositoriesForStudents/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jspdf": "^2.5.1"
+    "jspdf": "^2.5.1",
+    "octonode": "^0.10.2",
+    "transliteration": "^2.3.5"
   }
 }
