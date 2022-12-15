@@ -1,31 +1,6 @@
 import { jsPDF } from "jspdf"
 import { cyrillicFont } from './cyrillicFont.mjs';
-
-
-const simpleQuestions = `как создать переменную в javascript? отличия let const var.
-что такое IIFE в javascript. Привести пример использования
-что такое DOM?
-как найти DOM element в javascript
-как подключить javascript на страницу. Приведите пример как минимум 2х разных способов.
-Напишите несколько примеров различных типов css селекторов. (от 3х)
-как можно добавить обработчик события элементу?
-для чего нужно ключевое слово debugger.
-для чего нужен console.log
-для чего нужны метод stopPropagation? привести пример
-для чего нужен метод preventDefault? привести пример
-что такое http? назначение, из чего состоит httpRequest и httpResponse
-как можно передать данные на сервер с помощью http. приведите несколько примеров
-опишите разные типы статус кодов в http и их назначение
-что такое uri? опишите схему uri
-приведите пример кода выполнения http запроса из javascript и обработки ответа
-что такое npm и для чего он нужен?
-что такое semVer? приведите примеры разных описаний версий и что они значат
-расскажите о разнице dependencies, devDependencies, optionalDependencies с примерами
-для чего нужен файл package.json? опишите его примерную структуру
-что такое nodejs, его назначение, преимущества, недостатки?`.split('\n')
-
-const otherQuestions = `что такое longpolling, как он работает?
-что такое websocket как он работает?`.split('\n')
+import { firstGroup, secondGroup } from './questions.mjs';
 
 const students = `Ачарья Никеш
 Бондарь Артем Игоревич
@@ -80,26 +55,45 @@ function getRandomQuestions(number, questions) {
     return [...randomQuestions]
 }
 
-const res = students.map((studentName) => ({
+function getQuestionsWithPoints(number, questions) {
+    return questions.filter(q => q.points === number);
+}
+
+// const questionsForStudents = students.map((studentName) => ({
+//     studentName,
+//     title: 'Рубежная работа №1 20.10.2022',
+//     questions: [
+//         ...getRandomQuestions(3, getQuestionsWithPoints(2, firstGroup)),
+//         ...getRandomQuestions(1, getQuestionsWithPoints(1, firstGroup)),
+//         ...getRandomQuestions(1, getQuestionsWithPoints(3, firstGroup)),
+//     ]
+// }));
+
+const questionsForStudents = students.map((studentName) => ({
     studentName,
-    questions: [...getRandomQuestions(4, simpleQuestions), ...getRandomQuestions(1, otherQuestions)]
+    title: 'Рубежная работа №2 15.12.2022',
+    questions: [
+        ...getRandomQuestions(2, getQuestionsWithPoints(3, secondGroup)),
+        ...getRandomQuestions(1, getQuestionsWithPoints(4, secondGroup)),
+    ]
 }));
+
 
 const pdfDocument = new jsPDF()
 
 pdfDocument.addFileToVFS('Cyrillic.ttf', cyrillicFont);
 pdfDocument.addFont('Cyrillic.ttf', 'Cyrillic', 'normal');
-pdfDocument.setFont('Cyrillic')
-pdfDocument.setFontSize(12)
+pdfDocument.setFont('Cyrillic');
+pdfDocument.setFontSize(12);
 
-res.forEach(item => {
-    const text = `Рубежная работа №1 20.10.2022 \n
+questionsForStudents.forEach(item => {
+    const text = `${item.title} \n
     ${item.studentName} \n
-    Вопросы: \n${item.questions.map((q, i) => `${i + 1}) ${q}`).join('\n')}`
+    Вопросы: \n${item.questions.map((q, i) => `${i + 1}) ${q.text}`).join('\n')}`
  
     pdfDocument.text(text, 10, 10)
     pdfDocument.addPage()
-})
+});
 
 pdfDocument.save('rubesh.pdf')
 
