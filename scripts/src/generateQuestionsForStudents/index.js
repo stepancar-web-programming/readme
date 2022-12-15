@@ -1,4 +1,6 @@
 import { jsPDF } from "jspdf"
+import { cyrillicFont } from './cyrillicFont.mjs';
+
 
 const simpleQuestions = `как создать переменную в javascript? отличия let const var.
 что такое IIFE в javascript. Привести пример использования
@@ -84,10 +86,10 @@ const res = students.map((studentName) => ({
 }));
 
 const pdfDocument = new jsPDF()
-// TODO: implement Cyrillic
-// pdfDocument.addFileToVFS('CyrillicFont.ttf', font)
-// pdfDocument.addFont('CyrillicFont.ttf', 'Cyrillic', 'normal');
-// pdfDocument.setFont('Cyrillic')
+
+pdfDocument.addFileToVFS('Cyrillic.ttf', cyrillicFont);
+pdfDocument.addFont('Cyrillic.ttf', 'Cyrillic', 'normal');
+pdfDocument.setFont('Cyrillic')
 pdfDocument.setFontSize(12)
 
 res.forEach(item => {
