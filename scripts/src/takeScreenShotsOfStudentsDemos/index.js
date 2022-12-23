@@ -65,9 +65,9 @@ async function getDefaultBranch(organizationName, repositoryName) {
     const url = `${GIT_BRANCHES_API}/${organizationName}/${repositoryName}`;
     const apiAnswer = await fetch(url).then((response) => response.json()).catch((e) => {
       console.log(`Can't extract ${repositoryName} info from API. Error: ${e}`);
-      return 'master';
+      return null;
     });
-    return apiAnswer['default_branch'];
+    return apiAnswer.default_branch;
   }
 
 function getRepositoryAPI(apiHost, organizationName, repositoryName) {
@@ -81,7 +81,7 @@ function getRepositoryAPI(apiHost, organizationName, repositoryName) {
 }
 
 async function getHomePageForRepository(repository) {
-  const repoDefaultBranch = await repository.getDefaultBranch();
+  const repoDefaultBranch = await repository.getDefaultBranch()  || 'master';
   const packageJsonContent = await repository.readFileFromBranch(FILE_WITH_DEMO_LINK, repoDefaultBranch)
     .then((an) => an)
     .catch((er) => {
@@ -100,7 +100,7 @@ async function getHomePageForRepository(repository) {
 }
 
 async function getReadMeForRepository(repository) {
-  const repoDefaultBranch = await repository.getDefaultBranch();
+  const repoDefaultBranch = await repository.getDefaultBranch() || 'master';
   const readMeContent = await repository.readFileFromBranch(README_NAME, repoDefaultBranch)
     .then((an) => an)
     .catch((er) => {
