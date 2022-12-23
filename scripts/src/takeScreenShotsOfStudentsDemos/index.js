@@ -133,7 +133,7 @@ if ((studsPath !== null) && (studsPath !== undefined)) {
 
         const demoLink = await getHomePageForRepository(project);
         const readMeContent = await getReadMeForRepository(project);
-        if ((demoLink === null) || (demoLink === undefined) || (readMeContent === null)) {
+        if (!demoLink || !readMeContent) {
         console.log(`Finished processing ${project.repositoryName} as required files were not found`);
         // eslint-disable-next-line no-continue
         continue;
