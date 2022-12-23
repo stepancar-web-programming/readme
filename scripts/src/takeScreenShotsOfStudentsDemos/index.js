@@ -7,8 +7,8 @@ import { Builder } from 'selenium-webdriver';
 const ORG_NAME = 'stepancar-web-programming';
 const SEASON = '2022-fall';
 const PROJECT_TYPE = 'lab-portfolio';
-const BRANCH = 'dev';
 const GIT_API_HOSTNAME = 'https://raw.githubusercontent.com';
+const GIT_BRANCHES_API = 'https://api.github.com/repos';
 const FILE_WITH_DEMO_LINK = 'package.json';
 const README_NAME = 'README.md';
 const API_NOT_FOUND_MESSAGE = '404: Not Found';
@@ -58,37 +58,50 @@ async function getGitFileContent(fileLocation, readFileName, branch) {
   return apiAnswer;
 }
 
+async function getDefaultBranch(organizationName, repositoryName) {
+    const url = `${GIT_BRANCHES_API}/${organizationName}/${repositoryName}`;
+    const apiAnswer = await fetch(url).then((response) => response.json()).catch((e) => {
+      console.log(`Can't extract ${repositoryName} info from API. Error: ${e}`);
+      return 'master';
+    });
+    return apiAnswer['default_branch'];
+  }
+
 function getRepositoryAPI(apiHost, organizationName, repositoryName) {
   const linkToRepository = `${apiHost}/${organizationName}/${repositoryName}`;
   return {
     linkToRepository,
     repositoryName,
     readFileFromBranch: async (fileName, branch = 'master') => getGitFileContent(linkToRepository, fileName, branch),
+    getDefaultBranch: async () => getDefaultBranch(organizationName, repositoryName),
   };
 }
 
 async function getHomePageForRepository(repository) {
-  const packageJsonContent = await repository.readFileFromBranch(FILE_WITH_DEMO_LINK, BRANCH)
+  const repoDefaultBranch = await repository.getDefaultBranch();
+  const packageJsonContent = await repository.readFileFromBranch(FILE_WITH_DEMO_LINK, repoDefaultBranch)
     .then((an) => an)
     .catch((er) => {
-      console.log(`Error ${er} occured getting ${FILE_WITH_DEMO_LINK} for repo ${repository.repositoryName} on branch ${BRANCH}`);
+      console.log(`Error ${er} occured getting ${FILE_WITH_DEMO_LINK} for repo ${repository.repositoryName} on branch ${repoDefaultBranch}`);
       return null;
     });
   if (packageJsonContent === null) return null;
   let packageAsJson;
   try {
     packageAsJson = JSON.parse(packageJsonContent);
+    return packageAsJson.homepage;
   } catch {
-    console.log(`Incorrect format for ${FILE_WITH_DEMO_LINK} for repo ${repository.repositoryName} on branch ${BRANCH}`);
+    console.log(`Incorrect format for ${FILE_WITH_DEMO_LINK} for repo ${repository.repositoryName} on branch ${repoDefaultBranch}`);
   }
-  return packageAsJson.homepage;
+  return null;
 }
 
 async function getReadMeForRepository(repository) {
-  const readMeContent = await repository.readFileFromBranch(README_NAME, BRANCH)
+  const repoDefaultBranch = await repository.getDefaultBranch();
+  const readMeContent = await repository.readFileFromBranch(README_NAME, repoDefaultBranch)
     .then((an) => an)
     .catch((er) => {
-      console.log(`Error ${er} occured getting ${README_NAME} for repo ${repository.repositoryName} on branch ${BRANCH}`);
+      console.log(`Error ${er} occured getting ${README_NAME} for repo ${repository.repositoryName} on branch ${repoDefaultBranch}`);
       return null;
     });
   return readMeContent;
@@ -116,7 +129,7 @@ try {
 
     const demoLink = await getHomePageForRepository(project);
     const readMeContent = await getReadMeForRepository(project);
-    if ((demoLink === null) || (readMeContent === null)) {
+    if ((demoLink === null) || (demoLink === undefined) || (readMeContent === null)) {
       console.log(`Finished processing ${project.repositoryName} as required files were not found`);
       // eslint-disable-next-line no-continue
       continue;
