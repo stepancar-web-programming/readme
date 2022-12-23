@@ -13,7 +13,8 @@ const FILE_WITH_DEMO_LINK = 'package.json';
 const README_NAME = 'README.md';
 const API_NOT_FOUND_MESSAGE = '404: Not Found';
 
-const STUDENTS_LIST_FILE_NAME = 'studs.txt';
+
+let studsPath; // путь до списка студентов
 
 let HEIGHT = 1080;
 let WIDTH = 1920;
@@ -27,12 +28,14 @@ process.argv.forEach((val) => {
     if (argParts[0] === 'height') {
       HEIGHT = parseInt(argParts[1], 10);
     }
+    if (argParts[0] === 'studListPath') {
+        studsPath = argParts[1];
+    }
   }
 });
 
 const fsp = fs.promises;
 const PROJECT_DIR_NAME = path.resolve();
-const studsPath = path.join(PROJECT_DIR_NAME, STUDENTS_LIST_FILE_NAME); // путь до списка студентов
 const projectsInfo = [];
 const RESULTSROOT = path.join(PROJECT_DIR_NAME, 'results');
 const PAGE_LOADED_SCRIPTS_EXECUTED_DELAY = 1000;
@@ -107,65 +110,70 @@ async function getReadMeForRepository(repository) {
   return readMeContent;
 }
 
-fsp.readFile(studsPath, { encoding: 'utf-8' })
-  .then((data) => {
-    const studs = data.split('\n');
+if ((studsPath !== null) && (studsPath !== undefined)) {
+    fsp.readFile(studsPath, { encoding: 'utf-8' })
+    .then((data) => {
+        const studs = data.split('\n');
 
-    studs.forEach(async (rawStudentName) => {
-      const repoName = getRepoName(SEASON, PROJECT_TYPE, rawStudentName);
-      console.log(`Getting repo ${repoName} information...`);
-      projectsInfo.push(getRepositoryAPI(GIT_API_HOSTNAME, ORG_NAME, repoName));
+        studs.forEach(async (rawStudentName) => {
+        const repoName = getRepoName(SEASON, PROJECT_TYPE, rawStudentName);
+        console.log(`Getting repo ${repoName} information...`);
+        projectsInfo.push(getRepositoryAPI(GIT_API_HOSTNAME, ORG_NAME, repoName));
+        });
+    })
+    .catch((err) => {
+        console.log(err);
     });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
-const driver = await new Builder().forBrowser('chrome').build();
-try {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const project of projectsInfo) {
-    /* eslint-disable no-await-in-loop */
+    const driver = await new Builder().forBrowser('chrome').build();
+    try {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const project of projectsInfo) {
+        /* eslint-disable no-await-in-loop */
 
-    const demoLink = await getHomePageForRepository(project);
-    const readMeContent = await getReadMeForRepository(project);
-    if ((demoLink === null) || (demoLink === undefined) || (readMeContent === null)) {
-      console.log(`Finished processing ${project.repositoryName} as required files were not found`);
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-
-    const dirpath = path.join(RESULTSROOT, project.repositoryName); // папка для каждого студента
-    fs.mkdirSync(dirpath, { recursive: true });
-
-    const dlUrl = new URL(demoLink);
-    let dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname;
-    if (dlPath[dlPath.length - 1] === '/') {
-      dlPath = dlPath.slice(0, -1);
-    }
-    dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
-    // https://site.com/a/b/c.html сохранится, как /a/b/c.html
-    const fileParentDirs = dlPath.split('/');
-    fileParentDirs.pop();
-    if (fileParentDirs.length > 0) {
-      fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
-    }
-
-    fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readMeContent);
-
-    await driver.get(demoLink);
-    await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
-    const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
-    await new Promise((r) => { setTimeout(r, PAGE_LOADED_SCRIPTS_EXECUTED_DELAY); });
-    await driver.takeScreenshot().then((pic) => {
-      fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
-        if (screenShotError) {
-          console.log(screenShotError);
+        const demoLink = await getHomePageForRepository(project);
+        const readMeContent = await getReadMeForRepository(project);
+        if ((demoLink === null) || (demoLink === undefined) || (readMeContent === null)) {
+        console.log(`Finished processing ${project.repositoryName} as required files were not found`);
+        // eslint-disable-next-line no-continue
+        continue;
         }
-      });
-    });
-    /* eslint-enable no-await-in-loop */
-  }
-} finally {
-  await driver.quit();
+
+        const dirpath = path.join(RESULTSROOT, project.repositoryName); // папка для каждого студента
+        fs.mkdirSync(dirpath, { recursive: true });
+
+        const dlUrl = new URL(demoLink);
+        let dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname;
+        if (dlPath[dlPath.length - 1] === '/') {
+        dlPath = dlPath.slice(0, -1);
+        }
+        dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
+        // https://site.com/a/b/c.html сохранится, как /a/b/c.html
+        const fileParentDirs = dlPath.split('/');
+        fileParentDirs.pop();
+        if (fileParentDirs.length > 0) {
+        fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
+        }
+
+        fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readMeContent);
+
+        await driver.get(demoLink);
+        await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
+        const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
+        await new Promise((r) => { setTimeout(r, PAGE_LOADED_SCRIPTS_EXECUTED_DELAY); });
+        await driver.takeScreenshot().then((pic) => {
+        fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
+            if (screenShotError) {
+            console.log(screenShotError);
+            }
+        });
+        });
+        /* eslint-enable no-await-in-loop */
+    }
+    } finally {
+    await driver.quit();
+    }
+}
+else {
+    console.log('No students list file was provided');
 }
