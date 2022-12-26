@@ -110,70 +110,88 @@ async function getReadMeForRepository(repository) {
   return readMeContent;
 }
 
-if ((studsPath !== null) && (studsPath !== undefined)) {
-    fsp.readFile(studsPath, { encoding: 'utf-8' })
-    .then((data) => {
-        const studs = data.split('\n');
 
-        studs.forEach(async (rawStudentName) => {
-        const repoName = getRepoName(SEASON, PROJECT_TYPE, rawStudentName);
-        console.log(`Getting repo ${repoName} information...`);
-        projectsInfo.push(getRepositoryAPI(GIT_API_HOSTNAME, ORG_NAME, repoName));
-        });
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+async function takeStudentsScreenshots(studsPath, screenWidth, screenHeight) {
+  if ((studsPath !== null) && (studsPath !== undefined)) {
+      fsp.readFile(studsPath, { encoding: 'utf-8' })
+      .then((data) => {
+          const studs = data.split('\n');
 
-    const driver = await new Builder().forBrowser('chrome').build();
-    try {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const project of projectsInfo) {
-        /* eslint-disable no-await-in-loop */
+          studs.forEach(async (rawStudentName) => {
+          const repoName = getRepoName(SEASON, PROJECT_TYPE, rawStudentName);
+          console.log(`Getting repo ${repoName} information...`);
+          projectsInfo.push(getRepositoryAPI(GIT_API_HOSTNAME, ORG_NAME, repoName));
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+      });
 
-        const demoLink = await getHomePageForRepository(project);
-        const readMeContent = await getReadMeForRepository(project);
-        if (!demoLink || !readMeContent) {
-        console.log(`Finished processing ${project.repositoryName} as required files were not found`);
-        // eslint-disable-next-line no-continue
-        continue;
+      const driver = await new Builder().forBrowser('chrome').build();
+
+      try {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const project of projectsInfo) {
+            /* eslint-disable no-await-in-loop */
+            try {
+              const demoLink = await getHomePageForRepository(project);
+              const readMeContent = await getReadMeForRepository(project);
+              if (!demoLink || !readMeContent) {
+                console.log(`Finished processing ${project.repositoryName} as required files were not found`);
+                // eslint-disable-next-line no-continue
+                continue;
+              }
+
+              const dirpath = path.join(RESULTSROOT, project.repositoryName); // папка для каждого студента
+              fs.mkdirSync(dirpath, { recursive: true });
+
+              let dlUrl;
+              let dlPath;
+              try { 
+                dlUrl = new URL(demoLink);
+                dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname
+              }
+              catch (urlErr) {
+                console.log(`Bad url ${demoLink} was provided for ${project.repositoryName}. Error: ${urlErr}`);
+                // eslint-disable-next-line no-continue
+                continue;
+              }
+              if (dlPath[dlPath.length - 1] === '/') {
+                dlPath = dlPath.slice(0, -1);
+              }
+              dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
+              // https://site.com/a/b/c.html сохранится, как /a/b/c.html
+              const fileParentDirs = dlPath.split('/');
+              fileParentDirs.pop();
+              if (fileParentDirs.length > 0) {
+                fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
+              }
+
+              fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readMeContent);
+
+              await driver.get(demoLink);
+              await driver.manage().window().setRect({ height: screenHeight, width: screenWidth });
+              const screenShotFileName = `${dlPath}${screenHeight}x${screenWidth}`;
+              await new Promise((r) => { setTimeout(r, PAGE_LOADED_SCRIPTS_EXECUTED_DELAY); });
+              await driver.takeScreenshot().then((pic) => {
+              fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
+                  if (screenShotError) {
+                    console.log(screenShotError);
+                  }
+                });
+              });
+              /* eslint-enable no-await-in-loop */
+          } finally {
+            console.log(`Finished processing ${project.repositoryName}\n`);
+          }
         }
-
-        const dirpath = path.join(RESULTSROOT, project.repositoryName); // папка для каждого студента
-        fs.mkdirSync(dirpath, { recursive: true });
-
-        const dlUrl = new URL(demoLink);
-        let dlPath = dlUrl.pathname === '/' ? 'index' : dlUrl.pathname;
-        if (dlPath[dlPath.length - 1] === '/') {
-        dlPath = dlPath.slice(0, -1);
-        }
-        dlPath = dlPath.split('/').map((el) => el.replace(/[/\\?%*:|"<>]/g, '-')).join('/');
-        // https://site.com/a/b/c.html сохранится, как /a/b/c.html
-        const fileParentDirs = dlPath.split('/');
-        fileParentDirs.pop();
-        if (fileParentDirs.length > 0) {
-        fs.mkdir(path.join(dirpath, ...fileParentDirs), { recursive: true }, () => {});
-        }
-
-        fs.writeFileSync(path.join(dirpath, STUDENT_README_FILENAME), readMeContent);
-
-        await driver.get(demoLink);
-        await driver.manage().window().setRect({ height: HEIGHT, width: WIDTH });
-        const screenShotFileName = `${dlPath}${WIDTH}x${HEIGHT}`;
-        await new Promise((r) => { setTimeout(r, PAGE_LOADED_SCRIPTS_EXECUTED_DELAY); });
-        await driver.takeScreenshot().then((pic) => {
-        fs.writeFile(path.join(dirpath, `${screenShotFileName}.png`), pic, 'base64', (screenShotError) => {
-            if (screenShotError) {
-            console.log(screenShotError);
-            }
-        });
-        });
-        /* eslint-enable no-await-in-loop */
-    }
-    } finally {
-    await driver.quit();
-    }
+      } finally {
+        await driver.quit();
+      }
+  }
+  else {
+      console.log('No students list file was provided');
+  }
 }
-else {
-    console.log('No students list file was provided');
-}
+
+takeStudentsScreenshots(studsPath, WIDTH, HEIGHT);
