@@ -137,7 +137,10 @@ async function takeStudentsScreenshots(studsPath, screenWidth, screenHeight) {
               const demoLink = await getHomePageForRepository(project);
               const readMeContent = await getReadMeForRepository(project);
               if (!demoLink || !readMeContent) {
-                console.log(`Finished processing ${project.repositoryName} as required files were not found`);
+                let missingFiles;
+                if(!demoLink && !readMeContent) missingFiles = 'demo link and README.md';
+                else missingFiles = demoLink? 'README.md' : 'demo link';
+                console.log(`Interrupted processing ${project.repositoryName} as required files (${missingFiles}) were not found`);
                 // eslint-disable-next-line no-continue
                 continue;
               }
