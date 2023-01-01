@@ -1,6 +1,6 @@
 import { jsPDF } from "jspdf"
 import { cyrillicFont } from './cyrillicFont.mjs';
-import { firstGroup, secondGroup } from './questions.mjs';
+import { questions } from './questions/quiz1.mjs';
 
 const students = `Ачарья Никеш
 Бондарь Артем Игоревич
