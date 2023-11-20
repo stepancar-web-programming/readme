@@ -1,5 +1,5 @@
-const axios = require('axios');
-const {Octokit} = require("@octokit/core");
+import {Octokit} from "@octokit/core";
+import axios from "axios";
 const octokit = new Octokit({ auth: 'ВАШ API КЛЮЧ' });
 const org = 'stepancar-web-programming'; // Название вашей организации на GitHub
 const repoOwner = 'stepancar'; // Имя пользователя, владельца репозитория
