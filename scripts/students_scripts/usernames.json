@@ -2,6 +2,7 @@
   {
     "name": "Имя",
     "surname": "Фамилия",
+    "group": "Группа",
     "github": "Fed0d",
     "year": 2021,
     "season": "лето"
