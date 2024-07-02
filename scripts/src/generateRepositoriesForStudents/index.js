@@ -4,8 +4,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const OAUTHKEY = process.env.OAUTHKEY;
-const ORGNAME = 'belebeba';
-const REPONAMEPREFIX = "2022-fall-lab-portfolio-";
+const ORGNAME = 'stepancar-web-programming';
+const REPONAMEPREFIX = "2023-fall-lab-portfolio-";
 const REPODESCRIPTION = "Лабораторная работа по Веб-технологиям";
 const STUDENTSLISTFILENAME = 'studs.txt'
 
