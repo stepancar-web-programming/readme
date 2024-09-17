@@ -1,10 +1,10 @@
 [
     {
+        "id": 1,
+        "name": "Импортозамещение Miro",
         "githubUrl": "https://mygithub.com/project1",
         "teamMembers": [
-            {
-                "id": 1
-            }
+            368283, 368379
         ]
     }
 ]
