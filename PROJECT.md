@@ -105,7 +105,7 @@ https://github.com/stepancar-web-programming/readme/blob/master/projects.json
 }
 ```
 
-После merge нужно создать группу в телеграмме с именем webAppDev-2024-{projectId} и добавить туда всех участников проекта и преподавателя.
+После merge нужно создать группу в телеграмме с именем WebAppDev-2024-{projectId} и добавить туда всех участников проекта и преподавателя.
 
 
 Групповая оценка
