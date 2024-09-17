@@ -96,7 +96,7 @@ https://github.com/stepancar-web-programming/readme/blob/master/projects.json
 ```json
 {
     "id": 1,
-    "name": "Импортозамещение Miro",
+    "name": "Импортозамещение Miro", // название проекта можно поменять если преподаватель не одобрит
     "githubUrl": "https://mygithub.com/project1", // если у вас его пока нет - оставляйте пустую строку
     "taskTrackerUrl": "https://jira.com/myproject", // если у вас его пока нет - оставляйте пустую строку
     "teamMembers": [
@@ -106,6 +106,8 @@ https://github.com/stepancar-web-programming/readme/blob/master/projects.json
 ```
 
 После merge нужно создать группу в телеграмме с именем WebAppDev-2024-{projectId} и добавить туда всех участников проекта и преподавателя.
+
+Напишите в чате команды о предлагаемой теме, тегните преподавателя, он даст апрув или рекомендации по именованию проекта.
 
 
 Групповая оценка
