@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "Импортозамещение Miro", 
+        "name": "Интерактивная доска itmo.board", 
         "githubUrl": "https://github.com/CandyGoose/Miro_analog", 
         "taskTrackerUrl": "https://miroanalog.atlassian.net/jira", 
         "teamMembers": [
