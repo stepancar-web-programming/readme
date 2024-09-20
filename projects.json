@@ -1,11 +1,36 @@
 [
     {
         "id": 1,
-        "name": "Импортозамещение Miro", 
+        "name": "Интерактивная доска itmo.board", 
         "githubUrl": "https://github.com/CandyGoose/Miro_analog", 
         "taskTrackerUrl": "https://miroanalog.atlassian.net/jira", 
         "teamMembers": [
             368283, 368379, 372819, 335168, 368311
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Lumin",
+        "githubUrl": "https://github.com/dudosyka/lumin",
+        "taskTraceUrl": "https://app.weeek.net/ws/521235/shared/calendar/23fV0H9N33WfBxbUqTwBlgzWXb13Rz0w",
+        "teamMembers": [
+            367322, 368475, 367879, 368967, 367649
+        ],
+    },
+    {
+        "id": 5,
+        "name": "NerdCode", 
+        "githubUrl": "https://github.com/Nerds-International/nerd-code-frontend", 
+        "taskTrackerUrl": "https://nerdcode.atlassian.net/jira", 
+        "teamMembers": [
+            367970, 368604, 367522, 368381, 367845
+        ],
+    },
+    {
+        "id": 6,
+        "name": "Визуальная новелла, обучающая Prolog",
+        "teamMembers": [
+            367487, 368864, 367327, 322864
         ]
     }
 ]
