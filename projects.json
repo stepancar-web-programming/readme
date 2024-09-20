@@ -7,5 +7,14 @@
         "teamMembers": [
             368283, 368379, 372819, 335168, 368311
         ]
+    },
+    {
+        "id": 5,
+        "name": "NerdCode", 
+        "githubUrl": "https://github.com/Nerds-International/nerd-code-frontend", 
+        "taskTrackerUrl": "https://nerdcode.atlassian.net/jira", 
+        "teamMembers": [
+            367970, 368604, 367522, 368381, 367845
+        ]
     }
 ]
