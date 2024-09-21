@@ -32,5 +32,14 @@
         "teamMembers": [
             367487, 368864, 367327, 322864
         ]
+    },
+    {
+        "id": 7,
+        "name": "ArtCluster",
+        "githubUrl": "https://github.com/7Kseniya/WebProject",
+        "taskTrackerUrl": "webappdev7.atlassian.net",
+        "teamMembers": [
+            368231, 368051, 368526, 368991
+        ]
     }
 ]
