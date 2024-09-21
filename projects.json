@@ -32,5 +32,14 @@
         "teamMembers": [
             367487, 368864, 367327, 322864
         ]
+    },
+    {
+        "id": 10,
+        "name": "Разработка системы рекомендации игр на основе предпочтительных примеров пользователя",
+        "githubUrl": "https://github.com/tox1n71/game-selector", 
+        "taskTrackerUrl": "https://tox1n.atlassian.net/jira", 
+        "teamMembers": [
+            368791, 367629, 368938 
+        ]
     }
 ]
