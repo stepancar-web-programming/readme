@@ -230,7 +230,7 @@ https://github.com/stepancar-web-programming/readme/blob/master/projects.json
 ### G6 Финальные результаты 6 баллов
 
 |  | До 16.01  | после 16.01|
-|--|----------|----------|------------|
+|--|----------|----------|
 |T| 1        | 0.6      |
 
 
