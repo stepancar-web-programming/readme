@@ -28,7 +28,7 @@
     },
     {
         "id": 5,
-        "name": "NerdCode", 
+        "name": "Разработка платформы для соревновательного решения задач", 
         "githubUrl": "https://github.com/Nerds-International/nerd-code-frontend", 
         "taskTrackerUrl": "https://nerdcode.atlassian.net/jira", 
         "teamMembers": [
