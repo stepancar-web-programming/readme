@@ -9,6 +9,15 @@
         ]
     },
     {
+        "id": 2,
+        "name": "Разработка сервиса знакомств ITMO.meet", 
+        "githubUrl": "https://github.com/ITMO-meet", 
+        "taskTrackerUrl": "https://itmo-meet.youtrack.cloud/", 
+        "teamMembers": [
+            368446, 387612, 367379, 386871, 368722
+        ]
+    },
+    {
         "id": 8,
         "name": "Разработка приложения для создания сайтов (Lumin)",
         "githubUrl": "https://github.com/dudosyka/lumin",
