@@ -38,6 +38,8 @@
     {
         "id": 6,
         "name": "Разработка визуальной новеллы, обучающей Prolog",
+        "githubUrl": "https://github.com/Vad1mChK/LogicNovelMystery",
+        "taskTrackerUrl": "https://github.com/Vad1mChK/LogicNovelMystery/issues",
         "teamMembers": [
             367487, 368864, 367327, 322864
         ]
