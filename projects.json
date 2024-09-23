@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "Интерактивная доска itmo.board", 
+        "name": "Разработка рисовалки с коллаборативным редактированием", 
         "githubUrl": "https://github.com/CandyGoose/Miro_analog", 
         "taskTrackerUrl": "https://miroanalog.atlassian.net/jira", 
         "teamMembers": [
