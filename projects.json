@@ -24,7 +24,7 @@
         "taskTrackerUrl": "https://app.weeek.net/ws/521235/shared/calendar/23fV0H9N33WfBxbUqTwBlgzWXb13Rz0w",
         "teamMembers": [
             367322, 368475, 367879, 368967, 367649
-        ],
+        ]
     },
     {
         "id": 5,
@@ -33,7 +33,7 @@
         "taskTrackerUrl": "https://nerdcode.atlassian.net/jira", 
         "teamMembers": [
             367970, 368604, 367522, 368381, 367845
-        ],
+        ]
     },
     {
         "id": 6,
@@ -51,7 +51,7 @@
         "taskTrackerUrl": "webappdev7.atlassian.net",
         "teamMembers": [
             368231, 368051, 368526, 368991
-        ],
+        ]
     },
     {
         "id": 10,
