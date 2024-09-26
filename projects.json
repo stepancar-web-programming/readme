@@ -54,6 +54,15 @@
         ]
     },
     {
+        "id": 9,
+        "name": "Тематический аудиоплеер",
+        "githubUrl": "https://github.com/KayotPoziloy/thematic_audio_player", 
+        "taskTrackerUrl": "https://github.com/users/KayotPoziloy/projects/1", 
+        "teamMembers": [
+            369108, 367177, 368236, 368307, 311743
+        ]
+    },
+    {
         "id": 10,
         "name": "Разработка системы рекомендации игр на основе предпочтительных примеров пользователя",
         "githubUrl": "https://github.com/tox1n71/game-selector", 
