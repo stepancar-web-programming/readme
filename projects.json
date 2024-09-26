@@ -54,9 +54,10 @@
     {
         "id": 3,
         "name": "Разработка платформы для публикации и просмотров подкастов(TuneTalk)",
-        "githubUrl": "https://github.com/JenevyBatya/Terminal/tree/readme", 
+        "githubUrl": "https://github.com/JenevyBatya/TuneTalk/tree/readme", 
+        "taskTrackerUrl": "https://github.com/users/alinaagnistova/projects/1/views/1", 
         "teamMembers": [
-            367614, 370540, 367163, 345132, 368115
+            367614, 370540, 367163, 368115
         ]
     }
 ]
