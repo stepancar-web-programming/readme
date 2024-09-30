@@ -88,6 +88,14 @@
         "teamMembers": [
             335179, 369000, 338829, 367956
         ]
+    },
+{
+        "id" : 12 ,
+        "name" : "Разработка платформы для коллаборативного создания заметок  " ,
+        "githubUrl" : " https://github.com/bassceo/textify " ,
+        "taskTrackerUrl" : "https://meregodz.atlassian.net/jira/software/projects/TEXTIFY/boards/1 ",
+        "teamMembers" : [
+            3367960 , 368812 , 368314 , 367361 , 369061
+        ]
     }
-
 ]
