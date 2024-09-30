@@ -79,5 +79,15 @@
         "teamMembers": [
             367614, 370540, 367163, 368115
         ]
+    },
+    {
+        "id": 11,
+        "name": "Разработка приложения для планирования и ведения краткосрочных и долгосрочных событий",
+        "githubUrl": "",
+        "taskTrackerUrl": "https://task-track-web-app.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog",
+        "teamMembers": [
+            335179, 369000, 338829, 367956
+        ]
     }
+
 ]
