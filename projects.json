@@ -46,28 +46,56 @@
     },
     {
         "id": 7,
-        "name": "Разработка приложения для поиска мероприятий и знакомств",
+        "name": "Разработка фоторедактора",
         "githubUrl": "https://github.com/7Kseniya/WebProject",
-        "taskTrackerUrl": "webappdev7.atlassian.net",
+        "taskTrackerUrl": "https://webappdev7.atlassian.net/",
         "teamMembers": [
             368231, 368051, 368526, 368991
         ]
     },
     {
+        "id": 9,
+        "name": "Тематический аудиоплеер",
+        "githubUrl": "https://github.com/KayotPoziloy/thematic_audio_player", 
+        "taskTrackerUrl": "https://github.com/users/KayotPoziloy/projects/1", 
+        "teamMembers": [
+            369108, 367177, 368236, 368307, 311743
+        ]
+    },
+    {
         "id": 10,
-        "name": "Разработка системы рекомендации игр на основе предпочтительных примеров пользователя",
+        "name": "Разработка игры 'Уличные гонки' на платформе telegram mini apps",
         "githubUrl": "https://github.com/tox1n71/game-selector", 
         "taskTrackerUrl": "https://tox1n.atlassian.net/jira", 
         "teamMembers": [
-            368791, 367629, 368938
+            368791, 367629, 368938, 345132
         ]
     },
     {
         "id": 3,
-        "name": "Разработка платформы для знакомств и встреч на мероприятиях (Terminal)",
-        "githubUrl": "https://github.com/JenevyBatya/Terminal/tree/readme", 
+        "name": "Разработка платформы для публикации и просмотров подкастов(TuneTalk)",
+        "githubUrl": "https://github.com/JenevyBatya/TuneTalk/tree/readme", 
+        "taskTrackerUrl": "https://github.com/users/alinaagnistova/projects/1/views/1", 
         "teamMembers": [
-            367614, 370540, 367163, 345132, 368115
+            367614, 370540, 367163, 368115
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Разработка приложения для планирования и ведения краткосрочных и долгосрочных событий",
+        "githubUrl": "https://github.com/WebAppDev-2024-11",
+        "taskTrackerUrl": "https://task-track-web-app.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog",
+        "teamMembers": [
+            335179, 369000, 338829, 367956
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Разработка платформы для коллаборативного создания заметок",
+        "githubUrl": "https://github.com/bassceo/textify",
+        "taskTrackerUrl": "https://meregodz.atlassian.net/jira/software/projects/TEXTIFY/boards/1",
+        "teamMembers": [
+            367960, 368812, 368314, 367361, 369061
         ]
     }
 ]
