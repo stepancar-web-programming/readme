@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Разработка рисовалки с коллаборативным редактированием", 
-        "githubUrl": "https://github.com/CandyGoose/Miro_analog", 
+        "githubUrl": "https://github.com/CandyGoose/itmo.board", 
         "taskTrackerUrl": "https://miroanalog.atlassian.net/jira", 
         "teamMembers": [
             368283, 368379, 372819, 335168, 368311
