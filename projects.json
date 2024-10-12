@@ -55,7 +55,7 @@
     },
     {
         "id": 9,
-        "name": "Тематический аудиоплеер",
+        "name": "Разработка тематического аудиоплеера",
         "githubUrl": "https://github.com/KayotPoziloy/thematic_audio_player", 
         "taskTrackerUrl": "https://github.com/users/KayotPoziloy/projects/1", 
         "teamMembers": [
