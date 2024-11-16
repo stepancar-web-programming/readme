@@ -92,8 +92,8 @@
     {
         "id": 12,
         "name": "Разработка платформы для коллаборативного создания заметок",
-        "githubUrl": "https://github.com/bassceo/textify",
-        "taskTrackerUrl": "https://meregodz.atlassian.net/jira/software/projects/TEXTIFY/boards/1",
+        "githubUrl": "https://github.com/textify-bundle",
+        "taskTrackerUrl": "https://github.com/orgs/textify-bundle/projects/1",
         "teamMembers": [
             367960, 368812, 368314, 367361, 369061
         ]
