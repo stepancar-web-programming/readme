@@ -101,10 +101,10 @@
     {
         "id": 13,
         "name": "Разработка браузерного расширения для расширения функционала платформы devpost",
-        "githubUrl": "https://github.com/siroj03/DevPost-Judje-Certificate",
-        "taskTrackerUrl": "https://www.figma.com/design/nkuDvr0ADl4ZHmANvNCubG/Certificate?node-id=4-2&t=x22LRMICfoobIpXs-1",
+        "githubUrl": "https://github.com/alexeeey03/browser-extension",
+        "taskTrackerUrl": "",
         "teamMembers": [
-            317711, 334141
+            334141
         ]
     }
 ]
