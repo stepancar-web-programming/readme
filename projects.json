@@ -106,5 +106,15 @@
         "teamMembers": [
             334141
         ]
-    }
+    },
+    {
+    "id": 14,
+    "name": "Система для организации совместного выбора",
+    "githubUrl": "https://github.com/BuTy3/web-itmo-match", 
+    "taskTrackerUrl": "https://github.com/users/BuTy3/projects/3", 
+    "teamMembers": [
+        412991, 368799, 374806, 342951, 408552 
+    ]
+}
+
 ]
