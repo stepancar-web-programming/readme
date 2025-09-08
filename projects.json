@@ -26,5 +26,14 @@
 	"teamMembers": [
 	    409284, 408162, 408326
 	]
-    }
+    },
+	{
+	    "id": 4,
+	    "name": "Разработка веб-приложения для прогноза временных рядов цен активов",
+	    "githubUrl": "https://github.com/sidimekov/asset-price-predict",
+	    "taskTrackerUrl": "https://github.com/users/sidimekov/projects/2",
+	    "teamMembers": [
+	        409553, 409752, 346230, 395243, 385054
+	    ]
+	}
 ]
