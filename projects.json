@@ -17,5 +17,14 @@
         "teamMembers": [
             412991, 368799, 374806, 342951, 408552 
         ]
+    },
+    {
+	"id": 3,
+	"name": "Разработка мультиплеерной игры-платформера 'Oops! Trap!'",
+	"githubUrl": "https://github.com/nastosinka/oops_trap",
+	"taskTrackerUrl": "https://github.com/users/nastosinka/projects/3/views/1",
+	"teamMembers": [
+	    409284, 408162, 408326
+	]
     }
 ]
