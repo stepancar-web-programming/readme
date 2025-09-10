@@ -3,8 +3,8 @@
 
         "id": 1,
         "name": "DMath",
-        "githubUrl": "https://github.com/zevtos/DMath",
-        "taskTrackerUrl": "",
+        "githubUrl": "https://github.com/dmath-industries/DMath",
+        "taskTrackerUrl": "https://dmath.atlassian.net/jira/software/projects/DMATH/boards/1?atlOrigin=eyJpIjoiNDkxNDhkNGJiZmEzNGRkMThlZTgzMTc1YWFiMDUwZDAiLCJwIjoiaiJ9",
         "teamMembers": [
             409315, 290102, 408490, 408494
         ]
