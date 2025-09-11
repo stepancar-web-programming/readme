@@ -35,5 +35,14 @@
 	    "teamMembers": [
 	        409553, 409752, 346230, 395243, 385054
 	    ]
+	},
+	{
+	    "id": 5,
+	    "name": "Разработка веб-приложения для пекарни Vinegret",
+	    "githubUrl": "https://github.com/Itskstrsh/web-project",
+	    "taskTrackerUrl": "https://github.com/users/Itskstrsh/projects/1",
+	    "teamMembers": [
+	        370529, 409586, 409589, 408127
+	    ]
 	}
 ]
