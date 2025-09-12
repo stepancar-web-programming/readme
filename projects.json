@@ -37,12 +37,21 @@
 	    ]
 	},
 	{
-		"id": 5,
+	    "id": 5,
+	    "name": "Разработка веб-приложения для пекарни Vinegret",
+	    "githubUrl": "https://github.com/Itskstrsh/web-project",
+	    "taskTrackerUrl": "https://github.com/users/Itskstrsh/projects/1",
+	    "teamMembers": [
+	        370529, 409586, 409589, 408127
+	    ]
+	},
+  {
+		"id": 6,
 		"name": "Разработка веб-приложения игры Barcard",
 		"githubUrl": "https://github.com/allfeia/ITMO-Web-Barcard",
 		"taskTrackerUrl": "https://barcard.atlassian.net/jira/software/projects/SCRUM/summary",
 		"teamMembers": [
 	    	409211, 407691, 409797
 		]
-    }
+  }
 ]
