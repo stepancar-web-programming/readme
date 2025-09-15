@@ -19,13 +19,13 @@
         ]
     },
     {
-	"id": 3,
-	"name": "Разработка мультиплеерной игры-платформера 'Oops! Trap!'",
-	"githubUrl": "https://github.com/nastosinka/oops_trap",
-	"taskTrackerUrl": "https://github.com/users/nastosinka/projects/3/views/1",
-	"teamMembers": [
-	    409284, 408162, 408326
-	]
+		"id": 3,
+		"name": "Разработка мультиплеерной игры-платформера 'Oops! Trap!'",
+		"githubUrl": "https://github.com/nastosinka/oops_trap",
+		"taskTrackerUrl": "https://github.com/users/nastosinka/projects/3/views/1",
+		"teamMembers": [
+			409284, 408162, 408326
+		]
     },
 	{
 	    "id": 4,
@@ -45,13 +45,22 @@
 	        370529, 409586, 409589, 408127
 	    ]
 	},
-  {
+	{
 		"id": 6,
 		"name": "Разработка веб-приложения игры Barcard",
 		"githubUrl": "https://github.com/allfeia/ITMO-Web-Barcard",
 		"taskTrackerUrl": "https://barcard.atlassian.net/jira/software/projects/SCRUM/summary",
 		"teamMembers": [
-	    	409211, 407691, 409797
+			409211, 407691, 409797
 		]
-  }
+	},
+	{
+		"id": 7,
+		"name": "Разработка веб-приложения учета и анализа финансов",
+		"githubUrl": "https://github.com/EskimoCold/web-coursework",
+		"taskTrackerUrl": "https://app.todoist.com/app/project/web-coursework-6crrfPHfxrq6G6g2",
+		"teamMembers": [
+			409645, 368105, 367522, 408206
+		]
+	}
 ]
