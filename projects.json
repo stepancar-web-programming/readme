@@ -49,7 +49,7 @@
 		"id": 6,
 		"name": "Разработка веб-приложения игры Barcard",
 		"githubUrl": "https://github.com/allfeia/ITMO-Web-Barcard",
-		"taskTrackerUrl": "https://barcard.atlassian.net/jira/software/projects/SCRUM/summary",
+		"taskTrackerUrl": "https://github.com/allfeia/ITMO-Web-Barcard/issues",
 		"teamMembers": [
 	    	409211, 407691, 409797
 		]
