@@ -1,110 +1,21 @@
 [
     {
+
         "id": 1,
-        "name": "Разработка рисовалки с коллаборативным редактированием", 
-        "githubUrl": "https://github.com/CandyGoose/itmo.board", 
-        "taskTrackerUrl": "https://miroanalog.atlassian.net/jira", 
+        "name": "DMath",
+        "githubUrl": "https://github.com/dmath-industries/DMath",
+        "taskTrackerUrl": "https://dmath.atlassian.net/jira/software/projects/DMATH/boards/1?atlOrigin=eyJpIjoiNDkxNDhkNGJiZmEzNGRkMThlZTgzMTc1YWFiMDUwZDAiLCJwIjoiaiJ9",
         "teamMembers": [
-            368283, 368379, 372819, 335168, 368311
+            409315, 290102, 408490, 408494
         ]
     },
     {
         "id": 2,
-        "name": "Разработка сервиса знакомств ITMO.meet", 
-        "githubUrl": "https://github.com/ITMO-meet", 
-        "taskTrackerUrl": "https://itmo-meet.youtrack.cloud/", 
+        "name": "Система для организации совместного выбора",
+        "githubUrl": "https://github.com/BuTy3/web-itmo-match", 
+        "taskTrackerUrl": "https://github.com/users/BuTy3/projects/3", 
         "teamMembers": [
-            368446, 387612, 367379, 386871, 368722
-        ]
-    },
-    {
-        "id": 8,
-        "name": "Разработка приложения для создания сайтов (Lumin)",
-        "githubUrl": "https://github.com/Lumin-the-Awesome-page-builder",
-        "taskTrackerUrl": "https://app.weeek.net/ws/521235/shared/calendar/23fV0H9N33WfBxbUqTwBlgzWXb13Rz0w",
-        "teamMembers": [
-            367322, 368475, 367879, 368967, 367649
-        ]
-    },
-    {
-        "id": 5,
-        "name": "Разработка платформы для соревновательного решения задач", 
-        "githubUrl": "https://github.com/Nerds-International/nerd-code-frontend", 
-        "taskTrackerUrl": "https://nerdcode.atlassian.net/jira", 
-        "teamMembers": [
-            367970, 368604, 367522, 368381, 367845
-        ]
-    },
-    {
-        "id": 6,
-        "name": "Разработка визуальной новеллы, обучающей Prolog",
-        "githubUrl": "https://github.com/Vad1mChK/LogicNovelMystery",
-        "taskTrackerUrl": "https://github.com/Vad1mChK/LogicNovelMystery/issues",
-        "teamMembers": [
-            367487, 368864, 367327, 322864
-        ]
-    },
-    {
-        "id": 7,
-        "name": "Разработка фоторедактора",
-        "githubUrl": "https://github.com/7Kseniya/PhotoFlex",
-        "taskTrackerUrl": "https://webappdev7.atlassian.net/",
-        "teamMembers": [
-            368231, 368051, 368526, 368991
-        ]
-    },
-    {
-        "id": 9,
-        "name": "Разработка тематического аудиоплеера",
-        "githubUrl": "https://github.com/KayotPoziloy/thematic_audio_player", 
-        "taskTrackerUrl": "https://github.com/users/KayotPoziloy/projects/1", 
-        "teamMembers": [
-            369108, 367177, 368236, 368307, 311743
-        ]
-    },
-    {
-        "id": 10,
-        "name": "Разработка игры 'Уличные гонки' на платформе telegram mini apps",
-        "githubUrl": "https://github.com/tox1n71/game-selector", 
-        "taskTrackerUrl": "https://tox1n.atlassian.net/jira", 
-        "teamMembers": [
-            368791, 367629, 368938, 345132
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Разработка платформы для публикации и просмотров подкастов(TuneTalk)",
-        "githubUrl": "https://github.com/JenevyBatya/TuneTalk/tree/readme", 
-        "taskTrackerUrl": "https://github.com/users/alinaagnistova/projects/1/views/1", 
-        "teamMembers": [
-            367614, 370540, 367163, 368115
-        ]
-    },
-    {
-        "id": 11,
-        "name": "Разработка приложения для планирования и ведения краткосрочных и долгосрочных событий",
-        "githubUrl": "https://github.com/WebAppDev-2024-11",
-        "taskTrackerUrl": "https://task-track-web-app.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog",
-        "teamMembers": [
-            335179, 369000, 338829, 367956
-        ]
-    },
-    {
-        "id": 12,
-        "name": "Разработка платформы для коллаборативного создания заметок",
-        "githubUrl": "https://github.com/textify-bundle",
-        "taskTrackerUrl": "https://github.com/orgs/textify-bundle/projects/1",
-        "teamMembers": [
-            367960, 368812, 368314, 367361, 369061
-        ]
-    },
-    {
-        "id": 13,
-        "name": "Разработка браузерного расширения для расширения функционала платформы devpost",
-        "githubUrl": "https://github.com/alexeeey03/browser-extension",
-        "taskTrackerUrl": "",
-        "teamMembers": [
-            334141
+            412991, 368799, 374806, 342951, 408552 
         ]
     },
     {
@@ -113,7 +24,34 @@
 	"githubUrl": "https://github.com/nastosinka/oops_trap",
 	"taskTrackerUrl": "https://github.com/users/nastosinka/projects/3/views/1",
 	"teamMembers": [
-	    409284, 408162, 408326
+	    409284, 408162, 408326, 334230
 	]
-    }
+    },
+	{
+	    "id": 4,
+	    "name": "Разработка веб-приложения для прогноза временных рядов цен активов",
+	    "githubUrl": "https://github.com/sidimekov/asset-price-predict",
+	    "taskTrackerUrl": "https://github.com/users/sidimekov/projects/2",
+	    "teamMembers": [
+	        409553, 409752, 346230, 395243, 385054
+	    ]
+	},
+	{
+	    "id": 5,
+	    "name": "Разработка веб-приложения для пекарни Vinegret",
+	    "githubUrl": "https://github.com/Itskstrsh/web-project",
+	    "taskTrackerUrl": "https://github.com/users/Itskstrsh/projects/1",
+	    "teamMembers": [
+	        370529, 409586, 409589, 408127
+	    ]
+	},
+  {
+		"id": 6,
+		"name": "Разработка веб-приложения игры Barcard",
+		"githubUrl": "https://github.com/allfeia/ITMO-Web-Barcard",
+		"taskTrackerUrl": "https://barcard.atlassian.net/jira/software/projects/SCRUM/summary",
+		"teamMembers": [
+	    	409211, 407691, 409797
+		]
+  }
 ]
