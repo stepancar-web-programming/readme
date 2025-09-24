@@ -62,5 +62,13 @@
 		"teamMembers": [
 			409645, 368105, 367522, 408206
 		]
+	},
+	{
+		"id": 8,
+		"name": "FinDash",
+		"githubUrl": "https://github.com/Chekhov973/FinDash",
+		"taskTrackerUrl": "https://github.com/users/Chekhov973/projects/1",
+		"teamMembers": [
+			370165, 408662, 409310, 409024, 367038
+		]
 	}
-]
