@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    </head>
+    <body>
+        <div id="app">
+        </div>
+        <script>
+            function get_data(){
+                return new Promise((resolve, reject) => {
+                    resolve ({"products":[{"id":1,"title":"Essence Mascara Lash Princess","description":"The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.","category":"beauty","price":9.99,"discountPercentage":10.48,"rating":2.56,"stock":99,"tags":["beauty","mascara"],"brand":"Essence","sku":"BEA-ESS-ESS-001","weight":4,"dimensions":{"width":15.14,"height":13.08,"depth":22.99},"warrantyInformation":"1 week warranty","shippingInformation":"Ships in 3-5 business days","availabilityStatus":"In Stock","reviews":[{"rating":3,"comment":"Would not recommend!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Eleanor Collins","reviewerEmail":"eleanor.collins@x.dummyjson.com"},{"rating":4,"comment":"Very satisfied!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Lucas Gordon","reviewerEmail":"lucas.gordon@x.dummyjson.com"},{"rating":5,"comment":"Highly impressed!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Eleanor Collins","reviewerEmail":"eleanor.collins@x.dummyjson.com"}],"returnPolicy":"No return policy","minimumOrderQuantity":48,"meta":{"createdAt":"2025-04-30T09:41:02.053Z","updatedAt":"2025-04-30T09:41:02.053Z","barcode":"5784719087687","qrCode":"https://cdn.dummyjson.com/public/qr-code.png"},"images":["https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"],"thumbnail":"https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"},{"id":2,"title":"Eyeshadow Palette with Mirror","description":"The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.","category":"beauty","price":19.99,"discountPercentage":18.19,"rating":2.86,"stock":34,"tags":["beauty","eyeshadow"],"brand":"Glamour Beauty","sku":"BEA-GLA-EYE-002","weight":9,"dimensions":{"width":9.26,"height":22.47,"depth":27.67},"warrantyInformation":"1 year warranty","shippingInformation":"Ships in 2 weeks","availabilityStatus":"In Stock","reviews":[{"rating":5,"comment":"Great product!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Savannah Gomez","reviewerEmail":"savannah.gomez@x.dummyjson.com"},{"rating":4,"comment":"Awesome product!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Christian Perez","reviewerEmail":"christian.perez@x.dummyjson.com"},{"rating":1,"comment":"Poor quality!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Nicholas Bailey","reviewerEmail":"nicholas.bailey@x.dummyjson.com"}],"returnPolicy":"7 days return policy","minimumOrderQuantity":20,"meta":{"createdAt":"2025-04-30T09:41:02.053Z","updatedAt":"2025-04-30T09:41:02.053Z","barcode":"9170275171413","qrCode":"https://cdn.dummyjson.com/public/qr-code.png"},"images":["https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"],"thumbnail":"https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"},{"id":3,"title":"Powder Canister","description":"The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.","category":"beauty","price":14.99,"discountPercentage":9.84,"rating":4.64,"stock":89,"tags":["beauty","face powder"],"brand":"Velvet Touch","sku":"BEA-VEL-POW-003","weight":8,"dimensions":{"width":29.27,"height":27.93,"depth":20.59},"warrantyInformation":"3 months warranty","shippingInformation":"Ships in 1-2 business days","availabilityStatus":"In Stock","reviews":[{"rating":4,"comment":"Would buy again!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Alexander Jones","reviewerEmail":"alexander.jones@x.dummyjson.com"},{"rating":5,"comment":"Highly impressed!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Elijah Cruz","reviewerEmail":"elijah.cruz@x.dummyjson.com"},{"rating":1,"comment":"Very dissatisfied!","date":"2025-04-30T09:41:02.053Z","reviewerName":"Avery Perez","reviewerEmail":"avery.perez@x.dummyjson.com"}],"returnPolicy":"No return policy","minimumOrderQuantity":22,"meta":{"createdAt":"2025-04-30T09:41:02.053Z","updatedAt":"2025-04-30T09:41:02.053Z","barcode":"8418883906837","qrCode":"https://cdn.dummyjson.com/public/qr-code.png"},"images":["https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp"],"thumbnail":"https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp"}],"total":194,"skip":0,"limit":3})
+                })
+            }
+            // class MySet {
+            //     constructor(app_element, data) {
+            //         this.set = new Set()
+            //         this.app_element = app_element
+            //         this.data = data
+            //     }
+            //     add(element) {
+            //         this.set.add(element)
+            //         render(this.app_element, this.data, this)
+            //     }
+            //     delete(element) {
+            //         this.set.delete(element)
+            //         render(this.app_element, this.data, this)
+            //     }
+            //     has(element) {
+            //         return this.set.has(element)
+            //     }
+            // }
+
+
+            get_data().then(data => {
+                const app_element = document.getElementById('app')
+
+
+                let cart_items = new Set()
+                render(app_element, data, cart_items)
+
+                // const old_add = Set.prototype.add
+                // Set.prototype.add = function(element) {
+                //     old_add.call(this, element)
+                //     render(app_element, data, cart_items)
+                // }
+
+                // const old_del = Set.prototype.delete
+                // Set.prototype.delete = function (element) {
+                //     old_del.call(this, element)
+                //     render(app_element, data, cart_items)
+                // }
+
+                document.body.addEventListener('click', () => {
+                    render(app_element, data, cart_items)
+                })
+
+                // setInterval(() => {
+                //     render(app_element, data)
+                //     // console.log(cart_items)
+                // }, 300)
+            });
+
+            function render(app_element, data, cart_items) {
+                app_element.innerHTML = ""
+                const title_element = document.createElement('h1')
+                title_element.innerText = 'Product List'
+                app_element.appendChild(title_element)
+
+                function ProductList(data) {
+                    const ul_element = document.createElement('ul')
+                    data.products.forEach(product => {
+                        ul_element.appendChild(ProductComponent(product))
+                    });
+                    return ul_element
+                }
+                
+                app_element.appendChild(ProductList(data))
+
+                function ProductComponent(product) {
+                    const li_element = document.createElement('li')
+                    const li_title_element = document.createElement("span")
+                    li_title_element.innerText = `${product.title} - ${product.price}`
+                    li_element.appendChild(li_title_element)
+                    const button_element  = document.createElement('button')
+                    button_element.innerText = 'Добавить в корзину'
+
+                    const is_in_cart = cart_items.has(product.id)
+
+                    if (is_in_cart) {
+                        button_element.innerText = "Удалить из корзины"
+                    } else {
+                        button_element.innerText = "Добавить в корзину"
+                        if(cart_items.size == 2){
+                            const banner_element = document.createElement('span')
+                            banner_element.innerText = "добавь еще 1 в козину,получи 4-ый в подарок"
+                            app_element.appendChild(banner_element)
+                        }
+                    }
+                    
+                    button_element.addEventListener('click', function(){
+                        // console.count('click')
+                        // debugger
+                        if (is_in_cart){
+                            cart_items.delete(product.id)
+                        } else{
+                            cart_items.add(product.id)
+                        }
+                        // render(app_element, data)
+                    })
+                    li_element.appendChild(button_element)
+                    return li_element
+                }
+            }
+        </script>
+    </body>
+</html>
