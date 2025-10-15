@@ -71,4 +71,13 @@
 		"teamMembers": [
 			370165, 408662, 409310, 409024, 367038
 		]
-	}
+	},
+	{
+    "id": 9,
+    "name": "Ludowars battle, dodep first",
+    "githubUrl": "https://github.com/MaksArh/ludowars-battle",
+    "taskTrackerUrl": "https://ludowars.atlassian.net/jira/software/projects/LW/boards/1/backlog?atlOrigin=eyJpIjoiNDg0ZTcwZjNiYjBjNDc5NmI2MjZhOWJlZWZmY2JiOWYiLCJwIjoiaiJ9",
+    "teamMembers": [
+      412959, 395233, 339116
+    ]
+  }
