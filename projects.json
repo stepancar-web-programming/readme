@@ -80,4 +80,14 @@
     "teamMembers": [
       412959, 395233, 339116
     ]
+  },
+	{
+    "id": 10,
+    "name": "Game of Life PvP",
+    "githubUrl": "https://github.com/eto-a/game-of-life-pvp",
+    "taskTrackerUrl": "https://app.affine.pro/workspace/2eca6c43-ae1a-44d2-bee4-d62c55ba35de/vYnzpD9nuqS1DlkJD8uPU",
+    "teamMembers": [
+      289522
+    ]
   }
+]
