@@ -89,5 +89,14 @@
     "teamMembers": [
       289522
     ]
-  }
+  },
+	{
+	    "id": 11,
+	    "name": "Fluent - сервис для сдачи лабораторных работ",
+	    "githubUrl": "https://github.com/fluent-labs-manager",
+	    "taskTrackerUrl": "https://github.com/orgs/fluent-labs-manager/projects/1",
+	    "teamMembers": [
+	      372978, 465591, 467550, 467883
+    	]
+  	}
 ]
