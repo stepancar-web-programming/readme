@@ -89,5 +89,14 @@
     "teamMembers": [
       289522
     ]
-  }
+  },
+	{
+	"id": 13,
+	"name": "Разработка веб-приложения рекомендаций и трекинга фильмов Vie",
+	"githubUrl": "https://github.com/arthkinq/Vie",
+	"taskTrackerUrl": "https://github.com/users/arthkinq/projects/4",
+	"teamMembers": [
+		467495, 476011, 465527, 471835
+	 ]
+   }
 ]
