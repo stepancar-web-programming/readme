@@ -91,6 +91,15 @@
     ]
   },
 	{
+    "id": 13,
+    "name": "Разработка веб-приложения рекомендаций и трекинга фильмов Vie",
+    "githubUrl": "https://github.com/arthkinq/Vie",
+    "taskTrackerUrl": "https://github.com/users/arthkinq/projects/4",
+    "teamMembers": [
+      467495, 476011, 465527, 471835
+     ]
+   },
+  {
 	    "id": 11,
 	    "name": "Fluent - сервис для сдачи лабораторных работ",
 	    "githubUrl": "https://github.com/fluent-labs-manager",
@@ -107,5 +116,5 @@
     "teamMembers": [
         466866, 467297, 467870
     ]
-}
+  }
 ]
