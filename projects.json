@@ -107,5 +107,14 @@
 	    "teamMembers": [
 	      372978, 465591, 467550, 467883
     	]
+  },
+	{
+    "id": 12,
+    "name": "Сервис совместного просмотра видео",
+    "githubUrl": "https://github.com/trybenon/Web-dev", 
+    "taskTrackerUrl": "-",
+    "teamMembers": [
+        466866, 467297, 467870
+    ]
   }
 ]
