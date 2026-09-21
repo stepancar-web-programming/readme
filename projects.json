@@ -116,5 +116,14 @@
     "teamMembers": [
         466866, 467297, 467870
     ]
-  }
+  },
+	{
+	    "id": 14,
+	    "name": "GitЗрение",
+	    "githubUrl": "https://github.com/mrkotmon/git-zrenie",
+	    "taskTrackerUrl": "https://github.com/users/mrkotmon/projects/3",
+	    "teamMembers": [
+	      405271, 466080, 406672
+    	]
+  },
 ]
