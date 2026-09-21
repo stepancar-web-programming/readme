@@ -91,6 +91,18 @@
     ]
   },
 	{
+ add-dyakhan-exchange
+  "id": 15,
+  "name": "ДяханExchange — игровая крипто-биржа-пародия",
+  "githubUrl": "https://github.com/maz749/dyakhan-exchange",
+  "taskTrackerUrl": "https://hippizyn.atlassian.net/issues/?jql=project%20%3D%20SCRUM%20ORDER%20BY%20created%20DESC",
+  "teamMembers": [
+    465228,
+    472154,
+    467222
+  ]
+}
+
     "id": 13,
     "name": "Разработка веб-приложения рекомендаций и трекинга фильмов Vie",
     "githubUrl": "https://github.com/arthkinq/Vie",
@@ -126,4 +138,5 @@
 	      405271, 466080, 406672
     	]
   },
+ master
 ]
