@@ -91,6 +91,7 @@
     ]
   },
 	{
+ add-dyakhan-exchange
   "id": 15,
   "name": "ДяханExchange — игровая крипто-биржа-пародия",
   "githubUrl": "https://github.com/maz749/dyakhan-exchange",
@@ -101,4 +102,41 @@
     467222
   ]
 }
+
+    "id": 13,
+    "name": "Разработка веб-приложения рекомендаций и трекинга фильмов Vie",
+    "githubUrl": "https://github.com/arthkinq/Vie",
+    "taskTrackerUrl": "https://github.com/users/arthkinq/projects/4",
+    "teamMembers": [
+      467495, 476011, 465527, 471835
+     ]
+   },
+  {
+	    "id": 11,
+	    "name": "Fluent - сервис для сдачи лабораторных работ",
+	    "githubUrl": "https://github.com/fluent-labs-manager",
+	    "taskTrackerUrl": "https://github.com/orgs/fluent-labs-manager/projects/1",
+	    "teamMembers": [
+	      372978, 465591, 467550, 467883
+    	]
+  },
+	{
+    "id": 12,
+    "name": "Сервис совместного просмотра видео",
+    "githubUrl": "https://github.com/trybenon/Web-dev", 
+    "taskTrackerUrl": "https://github.com/users/trybenon/projects/1",
+    "teamMembers": [
+        466866, 467297, 467870
+    ]
+  },
+	{
+	    "id": 14,
+	    "name": "GitЗрение",
+	    "githubUrl": "https://github.com/mrkotmon/git-zrenie",
+	    "taskTrackerUrl": "https://github.com/users/mrkotmon/projects/3",
+	    "teamMembers": [
+	      405271, 466080, 406672
+    	]
+  },
+ master
 ]
